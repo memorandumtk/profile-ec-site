@@ -7,19 +7,7 @@ const userLogIn = async () => {
 
     // Userクラスのインスタンスを作成し、login()メソッドを呼び出す。
     const user = new User(email, password);
-    const isTheUserVerified = await user.login();
-
-    // ユーザーが認証されたかどうかを確認。
-    if (isTheUserVerified) {
-        console.log('User is verified');
-        // ユーザーが認証された場合、セッションを保存。
-        user.storeUserDataToSession();
-        // ログイン後のページにリダイレクト。
-        window.location.href = '/home.html';
-
-    } else {
-        console.log('User is not verified');
-    }
+    user.login();
 }
 
 document.querySelector('#login-form').addEventListener('submit', e => {
