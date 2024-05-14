@@ -1,15 +1,12 @@
-import RegisterUser from "./classes/RegisterUserClass";
+import User from "./classes/UserClass.js";
 
 const registerUser = async () => {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
 
-    const user = new RegisterUser(email, password);
+    const user = new User(email, password);
 
-    console.log(user.getName());
-    console.log(user.getEmail());
-    console.log(user.getPassword());
-
+    user.register();
 }
 
 document.querySelector('#register-form').addEventListener('submit', e => {

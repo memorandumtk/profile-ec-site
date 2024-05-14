@@ -35,8 +35,7 @@ class LoginUser {
 
     storeSession() {
         // セッションストレージにユーザーのメールアドレスを保存。
-        const sessionKey = `user_${this.user_id}`;
-        sessionStorage.setItem(sessionKey, this.email);
+        sessionStorage.setItem('login_user', this.email);
     }
 }
 

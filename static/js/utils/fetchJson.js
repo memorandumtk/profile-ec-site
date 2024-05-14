@@ -1,7 +1,7 @@
 export default async function fetchUserData() {
     try {
         // JSONデータ向けのリクエストを送信。
-        const response = await fetch('/data/customers.json');
+        const response = await fetch('/data/CustomersSample.json');
 
         if (!response.ok) {
             // もしもレスポンスがエラーならば、エラーObjectを作成。
