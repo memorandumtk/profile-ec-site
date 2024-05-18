@@ -14,12 +14,11 @@ class User {
 
     // ユーザーを登録するためのメソッド。
     register() {
-        // inputデータからユーザデータを作成。
 
         try {
             let users = JSON.parse(localStorage.getItem('users')) || [];
 
-            // ユーザーが存在しない場合、新しいユーザーを追加。ログインでも使うverifyUserメソッドを使って、ユーザーが存在するかどうかを確認。
+            // ユーザーが存在しない場合、新しいユーザーを追加。ログインでも使うverifyUserメソッドを使って、ユーザーが存在するかどうかを確認。verifyUserがfalseを返す場合、emailは存在しないため、新しいユーザーを追加できる。
             if (!this.verifyUser(users)) {
 
                 const newUser = {
