@@ -1,7 +1,12 @@
-export default async function fetchUserData() {
+/**
+ * JSONファイルのデータを取得するための関数。
+ * @param string fileName パスを含めて指定
+ * @returns 
+ */
+export default async function fetchData(fileName = '/data/CustomersSample.json') {
     try {
         // JSONデータ向けのリクエストを送信。
-        const response = await fetch('/data/CustomersSample.json');
+        const response = await fetch(fileName);
 
         if (!response.ok) {
             // もしもレスポンスがエラーならば、エラーObjectを作成。

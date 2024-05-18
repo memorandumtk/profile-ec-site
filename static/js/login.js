@@ -1,5 +1,5 @@
 import User from "/static/js/classes/UserClass.js";
-import fetchUserData from "/static/js/utils/fetchJson.js";
+import fetchData from "/static/js/utils/fetchJson.js";
 
 const userLogIn = async () => {
     const email = document.querySelector('#email').value;
@@ -16,7 +16,7 @@ document.querySelector('#login-form').addEventListener('submit', e => {
 })
 
 const storeSampleUserData = async () => {
-    const data = await fetchUserData();
+    const data = await fetchData();
     localStorage.setItem('users', JSON.stringify(data));
 }
 
