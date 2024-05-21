@@ -40,7 +40,7 @@ function createCard(plantData) {
 
     const cardButton = document.createElement('a');
     cardButton.classList.add('btn', 'btn-primary');
-    cardButton.href = '#';
+    cardButton.href = 'detail.html?slug=' + plantData.slug;
     cardButton.textContent = 'Detail';
 
     cardBody.appendChild(cardTitle);
