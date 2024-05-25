@@ -3,7 +3,7 @@
  * @param string fileName パスを含めて指定
  * @returns 
  */
-export default async function fetchData(fileName = '/data/CustomersSample.json') {
+export default async function fetchData(fileName = '/data/UsersSample.json') {
     try {
         // JSONデータ向けのリクエストを送信。
         const response = await fetch(fileName);

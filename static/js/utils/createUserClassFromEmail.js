@@ -1,4 +1,4 @@
-import { User } from '../classes/User.js';
+import User from '../classes/UserClass.js';
 
 /**
  * ローカルストレージに保存されているユーザーデータからemailを検索してユーザー情報を取得。
@@ -7,12 +7,18 @@ import { User } from '../classes/User.js';
  * @returns 
  */
 export function createUserClassFromEmail(email) {
-    userData = JSON.parse(localStorage.getItem('userData'));
+    const userData = JSON.parse(localStorage.getItem('users'));
 
     // ローカルストレージにユーザーデータがある場合、ユーザーデータからemailを検索してユーザー情報を取得
     if (userData) {
         const user = userData.find(user => user.email === email);
-        return user;
+
+        if (user){
+            return Object.assign(new User(), user);
+        } else {
+            console.log('User not found');
+        }
     }
 
+    return null;
 }

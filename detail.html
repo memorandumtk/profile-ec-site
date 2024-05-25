@@ -17,21 +17,25 @@
 
     <div>
         <h1>商品詳細</h1>
-        <div>
-            <img id="product-image" src="" alt="product-image">
-        </div>
-        <div>
-            <p>商品名: <span id="product-name"></span></p>
-            <p>説明: <span id="price"></span></p>
-            <p>商品コード: <span id="stock"></span></p>
-            <p>価格: <span id="price"></span></p>
-            <p>数量: <span id="number-of-purchase"></span></p>
-            <p>合計金額: <span id="total-price"></span></p>
-            <button id="purchase-button" class="btn btn-primary">購入</button>
+        <div class="container-sm text-center">
+            <div class="row">
+                <div class="col">
+                    <img id="product-image" src="" alt="product-image" class="rounded img-fluid">
+                </div>
+                <div class="col">
+                    <p>商品名: <span id="product-name"></span></p>
+                    <p>説明: <span id="product-description"></span></p>
+                    <p>商品コード: <span id="product-code"></span></p>
+                    <p>価格: <span id="product-price"></span></p>
+                    <p>数量: <input id="number-of-purchase" type="number"></input></p>
+                    <p>合計金額: <span id="total-price"></span></p>
+                    <button id="cart-button" class="btn btn-primary">カートに入れる</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    
+
     <script src="./static/js/detail.js" type="module"></script>
 
     <!-- BootStrap用JSをインポート -->

@@ -5,7 +5,6 @@ class User {
     constructor(email, password, firstName = null, lastName = null, phoneNumber = null, address = null) {
         this.email = email;
         this.password = password;
-        this.user_id = null;
         this.first_name = firstName;
         this.last_name = lastName;
         this.phone_number = phoneNumber;
@@ -85,7 +84,6 @@ class User {
         for (let user of data) {
             if (user.email === this.email && user.password === this.password) {
                 isVerifiyingSuccessful = true;
-                this.user_id = user.id;
                 break;
             }
         }

@@ -37,8 +37,20 @@
       }
     ],
     "products_in_cart": [
-      "product1",
-      "product2"
+      {
+        "id": 1,
+        "japanese_name": "product1",
+        "price": 500,
+        "quantity": 4,
+        "image_url": "https://bs.plantnet.org/image/o/53c73903dc455a3d734b193dad7d9d8c4ec0e324"
+      },
+      {
+        "id": 10,
+        "japanese_name": "product2",
+        "price": 200,
+        "quantity": 2,
+        "image_url": "https://bs.plantnet.org/image/o/53c73903dc455a3d734b193dad7d9d8c4ec0e324"
+      }
     ]
   }
 ]
