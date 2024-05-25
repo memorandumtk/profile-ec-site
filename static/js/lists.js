@@ -1,76 +1,104 @@
 import fetchData from "./utils/fetchJson.js";
+import Plant from "./classes/PlantClass.js";
 
 const cardsContainer = document.getElementById('cards-container');
 
 /**
- * 植物サンプルデータをセッションストレージに保存し、データを返す関数。
+ * 植物サンプルデータをローカルストレージに保存し、データを返す関数。
  */
-async function storeSamplePlantsData() {
+async function storeSamplePlantsDataToLocalStorage() {
 
     const plantsData = await fetchData('/data/PlantsSample.json');
     console.log(plantsData);
 
-    sessionStorage.setItem('plants', JSON.stringify(plantsData));
-
-    return plantsData;
+    localStorage.setItem('plants', JSON.stringify(plantsData));
 }
 
 /**
- * 入力されたデータからカード（Bootstrap）を作成する関数。
+ * ローカルストレージから植物データを取得する関数。
+ * また、取得したデータをクラス化したArrayを返す。 
  */
-function createCard(plantData) {
-    const card = document.createElement('div');
-    card.classList.add('card');
+// async function fetchPlantsDataFromLocalStorage() {
+//     let plantsData = [];
 
-    const cardImg = document.createElement('img');
-    cardImg.classList.add('card-img-top');
-    cardImg.src = plantData.image_url;
-    cardImg.alt = plantData.name;
+//     for (let plant of plants) {
+//         plant = new Plant(
+//             plant.id,
+//             plant.name,
+//             plant.japanese_name,
+//             plant.description,
+//             plant.image_url,
+//             plant.price,
+//             plant.stock,
+//             plant.slug,
+//             plant.number_of_liked,
+//         );
+        
+//         plantsData.push(plant);
+//     }
 
-    const cardBody = document.createElement('div');
-    cardBody.classList.add('card-body');
+//     return plantsData;
+// }
 
-    const cardTitle = document.createElement('h5');
-    cardTitle.classList.add('card-title');
-    cardTitle.textContent = plantData.japanese_name;
-
-    const cardText = document.createElement('p');
-    cardText.classList.add('card-text');
-    cardText.textContent = plantData.description;
-
-    const cardButton = document.createElement('a');
-    cardButton.classList.add('btn', 'btn-primary');
-    cardButton.href = 'detail.html?slug=' + plantData.slug;
-    cardButton.textContent = 'Detail';
-
-    cardBody.appendChild(cardTitle);
-    cardBody.appendChild(cardText);
-    cardBody.appendChild(cardButton);
-
-    card.appendChild(cardImg);
-    card.appendChild(cardBody);
-
-    return card;
-}
 
 /**
  * colをクラスに持つdiv要素を作成する関数。
  */
-function createColDiv() {
-    const colDiv = document.createElement('div');
-    colDiv.classList.add('col');
-
-    return colDiv;
-}
 
 /**
- * rowをクラスに持つdiv要素を作成する関数。
+ * 植物データからカードを作成し一覧表示用にする。
  */
-function createRowDiv() {
-    const rowDiv = document.createElement('div');
-    rowDiv.classList.add('row');
+// function createListsWithCard(plantsData) {
 
-    return rowDiv;
+//     let rowDiv;
+
+//     for (let i = 0; i < plantsData.length; i++) {
+
+//         let classifiedPlant = Object.assign(new Plant(), plantsData[i]);
+
+//         // 1行ごとに3つのカードが表示されるように3で割った余りが0のときのみrow用のDivを作成する。
+//         if (i % 3 === 0) {
+//             rowDiv = classifiedPlant.createRowDiv();
+//         }
+
+//         // plantsData[i]はPlantクラスのインスタンス。
+//         const card = classifiedPlant.createCard(plantsData[i]);
+
+//         const colDiv = createColDiv();
+//         colDiv.appendChild(card);
+
+//         rowDiv.appendChild(colDiv);
+
+//         cardsContainer.appendChild(rowDiv);
+//     }
+// }
+
+
+function createclassifiedAndLists (plantsData) {
+    const plants = JSON.parse(localStorage.getItem('plants'));
+
+    let rowDiv;
+    plants.map((plant, index) => {
+        let classifiedPlant = Object.assign(new Plant(), plant);
+
+        // 1行ごとに3つのカードが表示されるように3で割った余りが0のときのみrow用のDivを作成する。
+        if (index % 3 === 0) {
+            rowDiv = classifiedPlant.createRowDiv();
+        }
+
+        const card = classifiedPlant.createCard(classifiedPlant);
+
+        const colDiv = classifiedPlant.createColDiv();
+
+        colDiv.appendChild(card);
+        rowDiv.appendChild(colDiv);
+
+        cardsContainer.appendChild(rowDiv);
+
+        plantsData.push(classifiedPlant);
+    });
+
+    return plantsData;
 }
 
 
@@ -87,26 +115,12 @@ window.onload = async () => {
     sessionStorage.setItem('login_user', 'test@mail.com');
 
 
-    // 植物サンプルデータをセッションストレージに保存する関数を呼出し、データを保持。
-    const plantsData = await storeSamplePlantsData();
+    await storeSamplePlantsDataToLocalStorage();
 
-    console.log(plantsData);
-    // 植物データからカードを作成。
-    let rowDiv;
-    for (let i = 0; i < plantsData.length; i++) {
+    const classifiedPlants = createclassifiedAndLists([]);
 
-        // 1行ごとに3つのカードが表示されるようにする。
-        if (i % 3 === 0) {
-            rowDiv = createRowDiv();
-        }
 
-        const card = createCard(plantsData[i]);
-        const colDiv = createColDiv();
-        colDiv.appendChild(card);
-
-        rowDiv.appendChild(colDiv);
-
-        cardsContainer.appendChild(rowDiv);
-    }
+    console.log('Plants data from local storage and cleassified as Plant class:');
+    console.log(classifiedPlants);
 
 }

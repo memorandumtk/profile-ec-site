@@ -1,6 +1,6 @@
 [
   {
-    "id": 0,
+    "id": 1,
     "first_name": "first-test",
     "last_name": "last-test",
     "email": "test@mail.com",
@@ -24,7 +24,10 @@
         "price": 300
       }
     ],
-    "favorite_products": ["product1", "product2"],
+    "liked_products": [
+      "product1",
+      "product2"
+    ],
     "purchase_method": [
       {
         "type": "credit_card",
@@ -32,6 +35,10 @@
         "card_expiration_date": "12/23",
         "card_cvv": "123"
       }
+    ],
+    "products_in_cart": [
+      "product1",
+      "product2"
     ]
   }
 ]
