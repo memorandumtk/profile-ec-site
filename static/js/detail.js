@@ -1,6 +1,7 @@
 import Plant from './classes/PlantClass.js';
 import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import User from './classes/UserClass.js';
+import { updateUserDataFromLocalStorage } from './utils/updateUserDataFromLocalStorage.js';
 
 const productImage = document.querySelector('#product-image');
 const productName = document.querySelector('#product-name');
@@ -59,17 +60,6 @@ function displayProductInfo(plant) {
 
 
 /**
- * ローカルストレージから取得したログインユーザーのカートに商品を追加し、ローカルストレージに再度保存する。
- */
-function updateUsersData(user) {
-    const users = JSON.parse(localStorage.getItem('users'));
-    const index = users.findIndex(user => user.email === user.email);
-    users[index] = user;
-    localStorage.setItem('users', JSON.stringify(users));
-
-}
-
-/**
  * カートに商品を追加する関数で、「カートに入れる」ボタンをクリックしたときに実行される。
  * カートに同じ商品があるときの処理も後で必要 *******
  */
@@ -87,7 +77,7 @@ function addToCart(user) {
     console.log(user);
 
     // ユーザ情報の更新
-    updateUsersData(user);
+    updateUserDataFromLocalStorage(user);
 
     // カートページにリダイレクト
     window.location.href = '/cart.html';

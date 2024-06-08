@@ -2,8 +2,13 @@
 import Plant from './classes/PlantClass.js';
 import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import User from './classes/UserClass.js';
+import { updateUserDataFromLocalStorage } from './utils/updateUserDataFromLocalStorage.js';
 
 const cartProduct = document.querySelector('#cart-products');
+const cartSummaryDiv = document.querySelector('#cart-summary');
+const totalPriceSpan = document.querySelector('#total-price');
+
+let products = [];
 
 /**
  * 植物のすべての情報を取得する関数
@@ -21,31 +26,106 @@ function createclassifiedData(plantsData) {
     return plantsData;
 }
 
+/**
+ * 「数量」が変更されたときに実行される関数で、カート内の商品の数量を変更する。
+ */
+function handleQuantityChange(user, productId, quantity) {
+    const newProducts = products.map(product => {
+        if (product.id === productId) {
+            product.quantity = quantity;
+        }
+        return product;
+    });
+    user.products_in_cart = newProducts;
+    console.log(user);
+    updateUserDataFromLocalStorage(user);
+    redisplayCartList(user);
+}
 
 /**
- * ローカルストレージから取得したログインユーザーのカートに商品を追加し、ローカルストレージに再度保存する。
+ * 「削除」ボタンをクリックしたときに実行される関数で、カートから商品を削除する。
  */
-function updateUsersData(user) {
-    const users = JSON.parse(localStorage.getItem('users'));
-    const index = users.findIndex(user => user.email === user.email);
-    users[index] = user;
-    localStorage.setItem('users', JSON.stringify(users));
-
+function handleDeleteProductFromCart(user, productId){
+    const newProducts = products.filter(product => product.id !== productId);
+    user.products_in_cart = newProducts;
+    console.log(user);
+    updateUserDataFromLocalStorage(user);
+    redisplayCartList(user);
 }
 
 /**
  * 「購入」ボタンをクリックしたときに実行される関数で、ユーザの`puprchase_history`に商品を追加する。
- * detailが参考にできるよ*******
  */
 function handlePurchase(user) {
+    const purchaseList = []; // 今回の購入リスト
 
+    products.map((product, index) => {
+        const purchase = {
+            id: product.id,
+            japanese_name: product.japanese_name,
+            price: product.price,
+            quantity: product.quantity,
+            image_url: product.image_url,
+        };
+    
+        purchaseList.push(purchase);
+    })
+
+    const history = user.puprchase_history || [];
+    history.push(purchaseList);
+    user.purchase_history = history;
+    console.log(user);
+
+    // ユーザ情報の更新
+    updateUserDataFromLocalStorage(user);
 }
+
+/**
+ * 購入内容を表示するためコンテンツを作るための関数
+ */
+function displayCartList(user) {
+
+    if (products.length === 0) {
+        const emptyCart = document.createElement('p');
+        emptyCart.textContent = 'カートに商品がありません。';
+        cartSummaryDiv.appendChild(emptyCart);
+        return;
+    }
+
+    const cartListUl = document.createElement('ul');
+    cartListUl.classList.add('list-group', 'list-group-numbered');
+
+    let totalPrice = 0;
+
+    products.map((product, index) => {
+        const productLi = document.createElement('li');
+        productLi.classList.add('list-group-item', 'd-flex', 'justify-content-start', 'align-items-center');
+        let sumPrice = product.price * product.quantity;
+        totalPrice += sumPrice;
+        let liText = `${product.japanese_name} ${product.price}円 x ${product.quantity}個 ・・・ ${sumPrice}円`;
+        productLi.textContent = liText;
+        cartListUl.appendChild(productLi);
+    });
+    cartSummaryDiv.appendChild(cartListUl);
+
+    totalPriceSpan.textContent = `${totalPrice}円`;
+}
+
+/**
+ * 購入内容が変更された場合に再度表示させる関数
+ */
+function redisplayCartList(user) {
+    window.location.reload();
+    cartSummaryDiv.innerHTML = '';
+    displayCartList(user);
+    console.log('cart list is redisplayed');
+}
+
 
 /**
  * `products_in_cart`にある商品をカート商品用のDIVに表示する関数
  */
 function displayCartProducts(user) {
-    const products = user.products_in_cart || [];
 
     products.map((product, index) => {
     
@@ -64,25 +144,26 @@ function displayCartProducts(user) {
 
         // 商品情報DIV
         const productInfoDiv = document.createElement('div');
-        productInfoDiv.classList.add('col-8');
+        productInfoDiv.classList.add('col-8', 'd-grid', 'gap-2');
         // 商品名
         const productName = document.createElement('p');
         productName.textContent = product.japanese_name;
+        productName.classList.add('h3');
 
         // 価格等の下の部分のDIV
         const productInfoBottomDiv = document.createElement('div');
-        productInfoBottomDiv.classList.add('row');
+        productInfoBottomDiv.classList.add('row', 'justify-content-center', 'align-items-center');
 
         // 価格
         const productPrice = document.createElement('div');
-        productPrice.textContent = '価格： ' + product.price;
+        productPrice.textContent = `小売価格: ${product.price} 円`;
         productPrice.classList.add('col');
 
         // 数量
         const productQuantityDiv = document.createElement('div');
         productQuantityDiv.classList.add('col');
         const productQuantityInsideDiv = document.createElement('div');
-        productQuantityInsideDiv.classList.add('row');
+        productQuantityInsideDiv.classList.add('col');
         const productQuantityLabel = document.createElement('label');
         productQuantityLabel.setAttribute('for', 'quantity');
         productQuantityLabel.textContent = '数量';
@@ -92,14 +173,16 @@ function displayCartProducts(user) {
         productQuantity.type = 'number';
         productQuantity.classList.add('form-control');
         productQuantity.classList.add('col');
-        productQuantity.addEventListener('change', () => {});
+        productQuantity.addEventListener('change', (event) => {
+            handleQuantityChange(user, product.id, event.target.value);
+        });
         productQuantityInsideDiv.appendChild(productQuantityLabel);
         productQuantityInsideDiv.appendChild(productQuantity);
         productQuantityDiv.appendChild(productQuantityInsideDiv);
 
         // 合計金額
         const totalPrice = document.createElement('div');
-        totalPrice.textContent = product.price * product.quantity;
+        totalPrice.textContent = `合計: ${product.price * product.quantity} 円`;
         totalPrice.classList.add('col');
 
         // 削除ボタン
@@ -107,6 +190,9 @@ function displayCartProducts(user) {
         deleteButton.textContent = '削除';
         deleteButton.classList.add('btn', 'btn-danger');
         deleteButton.classList.add('col');
+        deleteButton.addEventListener('click', () => {
+            handleDeleteProductFromCart(user, product.id);
+        });
 
         productInfoBottomDiv.appendChild(productPrice);
         productInfoBottomDiv.appendChild(productQuantityDiv);
@@ -137,12 +223,15 @@ window.addEventListener('load', () => {
 
     console.log(classfiedUser)
 
+    products = classfiedUser.products_in_cart || [];
+
     displayCartProducts(classfiedUser);
 
+    displayCartList(classfiedUser);
 
     const purchaseButton = document.querySelector('#purchase-button');
     purchaseButton.addEventListener('click', () => {
-
+        handlePurchase(classfiedUser);
     });
 
 
