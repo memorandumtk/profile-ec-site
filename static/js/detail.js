@@ -7,9 +7,12 @@ const productImage = document.querySelector('#product-image');
 const productName = document.querySelector('#product-name');
 const productPrice = document.querySelector('#product-price');
 const totalPrice = document.querySelector('#total-price');
-const numberOfPurchase = document.querySelector('#number-of-purchase');
+const productQuantity = document.querySelector('#product-quantity');
+const productPriceAndQuantity = document.querySelector('#product-price-and-quantity');
 const productDescription = document.querySelector('#product-description');
 const productCode = document.querySelector('#product-code');
+const productLikedIcon = document.querySelector('#liked-icon');
+
 
 
 /**
@@ -38,42 +41,78 @@ function createclassifiedData(plantsData) {
     return plantsData;
 }
 
+/**
+ * いいね（スターアイコン）がクリックされたときに実行される関数
+ */
+function handleLikeIconClick(user) {
+    if (productLikedIcon.classList.contains('fa-star')) {
+        productLikedIcon.classList.remove('fa-star');
+        productLikedIcon.classList.add('fa-star-o');
+        user.liked_products = user.liked_products.filter(product => product !== productCode.textContent);
+    } else {
+        productLikedIcon.classList.remove('fa-star-o');
+        productLikedIcon.classList.add('fa-star');
+        user.liked_products.push(productCode.textContent);
+    }
+    updateUserDataFromLocalStorage(user);
+    console.log(user);
+}
 
 /**
  * 商品の情報をHTMLのエレメントに表示する関数
  */
-function displayProductInfo(plant) {
+function displayProductInfo(plant, user) {
     console.log(plant.japanese_name);
     productImage.src = plant.image_url;
     productName.textContent = plant.japanese_name;
+    if (user.liked_products.includes(plant.id.toString())) {
+        productLikedIcon.classList.add('fa', 'fa-star');
+        console.log('liked');
+    } else {
+        productLikedIcon.classList.add('fa', 'fa-star-o');
+        console.log('not liked');
+    }
+    productLikedIcon.addEventListener('click', () => {
+        handleLikeIconClick(user);
+    });
     productPrice.textContent = plant.price;
     productDescription.textContent = plant.description;
     totalPrice.textContent = plant.price;
     productPrice.textContent = plant.price;
     productCode.textContent = plant.id;
+    productPriceAndQuantity.classList.add('d-flex', 'justify-content-center', 'align-items-center')
 
-    numberOfPurchase.value = 1;
-    numberOfPurchase.addEventListener('change', () => {
-        totalPrice.textContent = plant.price * numberOfPurchase.value;
+    productQuantity.value = 1;
+    productQuantity.addEventListener('change', () => {
+        totalPrice.textContent = plant.price * productQuantity.value;
     })
 }
 
 
 /**
  * カートに商品を追加する関数で、「カートに入れる」ボタンをクリックしたときに実行される。
- * カートに同じ商品があるときの処理も後で必要 *******
  */
 function addToCart(user) {
     const product = {
         id: productCode.textContent,
         japanese_name: productName.textContent,
         price: productPrice.textContent,
-        quantity: numberOfPurchase.value,
+        quantity: productQuantity.value,
         image_url: productImage.src,
     }
 
     const cart = user.products_in_cart || [];
-    cart.push(product);
+    // カートに商品が存在するかどうかを確認
+    let isExist = false;
+    // カートに商品が存在する場合、数量を更新する
+    cart.map((product, index) => {
+        if (product.id === productCode.textContent) {
+            product.quantity = parseInt(product.quantity) + parseInt(productQuantity.value);
+            isExist = true;
+            return;
+        }
+    })
+    if (!isExist) cart.push(product); // カートに商品が存在しない場合、商品を追加する
     console.log(user);
 
     // ユーザ情報の更新
@@ -89,27 +128,27 @@ function addToCart(user) {
  */
 window.addEventListener('load', () => {
 
+    // クエリパラメータを取得
     const slugValue = getQueryParam('slug');
     console.log(slugValue);
+
+    // ログインしているユーザーを取得し、クラス化したユーザーを取得する。
+    const loginUserEmail = sessionStorage.getItem('login_user') || 'test@mail.com';
+    const classfiedUser = createUserClassFromEmail(loginUserEmail);
+    console.log('User data from local storage and cleassified as User class:');
+    console.log(classfiedUser)
+
 
     const classifiedPlants = createclassifiedData([]);
 
     // plantは既にクラス化されている状態。
     const plant = classifiedPlants.find(plant => plant.slug === slugValue);
     console.log(plant);
-    displayProductInfo(plant);
-
-    // ログインしているユーザーを取得し、クラス化したユーザーを取得する。
-    const loginUserEmail = sessionStorage.getItem('login_user') || 'test@mail.com';
-    const classfiedUser = createUserClassFromEmail(loginUserEmail);
-
+    displayProductInfo(plant, classfiedUser);
 
     const cartButton = document.querySelector('#cart-button');
     cartButton.addEventListener('click', () => {
         addToCart(classfiedUser);
     });
-
-    console.log('User data from local storage and cleassified as User class:');
-    console.log(classfiedUser)
 
 });

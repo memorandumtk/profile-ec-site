@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 
+    <!-- Font Awsomeのアイコンを使うためのリンク 高木アカウント -->
+    <script src="https://kit.fontawesome.com/ae8297218d.js" crossorigin="anonymous"></script>
     <!-- BootStrap用CSSをインポート -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -23,12 +25,27 @@
                     <img id="product-image" src="" alt="product-image" class="rounded img-fluid">
                 </div>
                 <div class="col">
-                    <p>商品名: <span id="product-name"></span></p>
-                    <p>説明: <span id="product-description"></span></p>
-                    <p>商品コード: <span id="product-code"></span></p>
-                    <p>価格: <span id="product-price"></span></p>
-                    <p>数量: <input id="number-of-purchase" type="number"></input></p>
-                    <p>合計金額: <span id="total-price"></span></p>
+                    <div class="d-flex flex-row justify-content-center align-items-center">
+                        <div class="">
+                            商品名: <span id="product-name"></span>
+                        </div>
+                        <div id="product-liked-div">
+                            <icon id="liked-icon" aria-hidden="true"></icon> <!-- お気に入りアイコン -->
+                        </div>
+                    </div>
+                    <div>
+                        説明: <span id="product-description"></span>
+                    </div>
+                    <div>
+                        商品コード: <span id="product-code"></span>
+                    </div>
+                    <div id="product-price-and-quantity">
+                        <p>価格: <span id="product-price"></span></p>
+                        <p>数量: <input id="product-quantity" type="number"></input></p>
+                    </div>
+                    <div>
+                        合計金額: <span id="total-price"></span>
+                    </div>
                     <button id="cart-button" class="btn btn-primary">カートに入れる</button>
                 </div>
             </div>

@@ -103,6 +103,16 @@ class User {
         sessionStorage.setItem('login_user', this.email);
     }
 
+    /**
+     * ユーザーのログアウトを行うためのメソッド。
+     */
+    logout() {
+        // セッションストレージからログインユーザーを削除。
+        sessionStorage.removeItem('login_user');
+        // ログアウト後のページにリダイレクト。
+        window.location.href = '/login.html';
+    }
+
 }
 
 export default User;
