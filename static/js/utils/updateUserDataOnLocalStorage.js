@@ -1,6 +1,6 @@
 
 /**
- * ローカルストレージから取得したログインユーザーのカートに商品を追加し、ローカルストレージに再度保存する。
+ * 引数であるユーザのEmail情報とマッチするローカルストレージのユーザの情報をアップデートし、ローカルストレージに再度保存する。
  * @param {Object} user - ログインユーザー
  */
 export function updateUserDataOnLocalStorage(user) {

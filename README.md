@@ -1,4 +1,6 @@
 # EC Site
+### [仕様書リンク](https://docs.google.com/document/d/1KiefDXuoXpakCo7yuf127dwxzC6yLg81RVRhmBFg3-8/edit)
+### [設計書リンク](https://docs.google.com/spreadsheets/d/1gL0qZ5nkARnwHfqiKx_gQFJBnHYZO9y1kT6b-fCjQfU/edit?gid=1191905279#gid=1191905279)
 
 ## ログイン(login.html)
 1. ページアクセス時に、ユーザデータがローカルストレージにない場合、`fetchData`関数を用いてサンプルユーザデータを格納する。
@@ -35,4 +37,8 @@
 
 ## お問い合わせ画面(inquiry.html)
 1. `formDisplay`関数を使って、もしもユーザがログインしていたら、名前とEmail用inputにフルネームとEmailを入力するようにする。
-2. `handleInquiryFormSubmit`関数でフォームがサブミットされた場合の処理を行う。`new FormData()`コンストラクタを使用してform内のデータをnameとvalueのkey-valueペアの形で取得できるようにする。
+2. `handleInquiryFormSubmit`関数でフォームがサブミットされた場合の処理を行う。関数内で`updateUserDataOnLocalStorage`を呼出し、フォームに入力された内容でローカルストレージのユーザ情報をアップデートするようにする。また、`new FormData()`コンストラクタを使用してform内の各nameとvalueの情報をkey-valueペアの形で取得できるようにしている。
+
+## マイページ画面(mypage.html)
+1. `formDisplay`関数を使って、各inputに対応するユーザ情報を入力するようにする。
+2. `handleMypageFormSubmit`関数でフォームがサブミットされた場合の処理を行う。関数内で`updateUserDataOnLocalStorage`を呼出し、フォームに入力された内容でローカルストレージのユーザ情報をアップデートするようにする。また、`new FormData()`コンストラクタを使用してform内の各nameとvalueの情報をkey-valueペアの形で取得できるようにしている。

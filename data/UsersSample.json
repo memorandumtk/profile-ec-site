@@ -4,7 +4,7 @@
     "first_name": "first-test",
     "last_name": "last-test",
     "email": "test@mail.com",
-    "phone": "1234567890",
+    "phone_number": "1234567890",
     "address": "test-address",
     "password": "p",
     "purchase_history": [
