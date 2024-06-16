@@ -1,5 +1,7 @@
 import fetchData from "./utils/fetchJson.js";
 import Plant from "./classes/PlantClass.js";
+import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
+import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
 
 const cardsContainer = document.getElementById('cards-container');
 
@@ -19,11 +21,17 @@ async function storeSamplePlantsDataToLocalStorage() {
  * @param {*} plantsData 
  * @returns 
  */
-function createclassifiedAndLists (plantsData) {
+function createclassifiedAndListsWithFavorites(likedPlants) {
+    let plantsData = [];
     const plants = JSON.parse(localStorage.getItem('plants'));
 
+    // お気に入りの植物のみを表示するために、ユーザのliked_productとマッチするお気に入りの植物のみをフィルタリングする。
+    const filteredPlants = plants.filter((plant) => {
+        return likedPlants.includes(plant.id);
+    });
+
     let rowDiv;
-    plants.map((plant, index) => {
+    filteredPlants.map((plant, index) => {
         let classifiedPlant = Object.assign(new Plant(), plant);
 
         // 1行ごとに3つのカードが表示されるように、3で割った余りが0のときのみrow用のDivを作成する。
@@ -49,14 +57,18 @@ function createclassifiedAndLists (plantsData) {
 
 window.onload = async () => {
 
-    // Temporary, automatically login.
-    sessionStorage.setItem('login_user', 'test@mail.com');
+    // ログインしているユーザーを取得し、クラス化したユーザーを取得する。
+    const loginUserEmail = sessionStorage.getItem('login_user');
+    const classfiedUser = createUserClassFromEmail(loginUserEmail);
 
+    console.log(classfiedUser)
 
+    // サンプルの植物データをローカルストレージに保存する。
     await storeSamplePlantsDataToLocalStorage();
-
-    const classifiedPlants = createclassifiedAndLists([]);
-
+    let classifiedPlants = [];
+    if (classfiedUser.liked_products.length > 0) {
+        classifiedPlants = createclassifiedAndListsWithFavorites(classfiedUser.liked_products);
+    }
 
     console.log('Plants data from local storage and cleassified as Plant class:');
     console.log(classifiedPlants);
