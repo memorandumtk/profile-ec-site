@@ -7,6 +7,7 @@
     "phone_number": "1234567890",
     "address": "test-address",
     "password": "p",
+    "is_logged_in": false,
     "purchase_history": [
       {
         "product_name": "product1",

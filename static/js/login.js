@@ -2,8 +2,9 @@ import { createUserClassFromEmail } from "./utils/createUserClassFromEmail.js";
 import User from "/static/js/classes/UserClass.js";
 import fetchData from "/static/js/utils/fetchJson.js";
 
-const LogoutButton = document.querySelector('#logout-button');
-
+/**
+ * ログイン処理を行う関数
+ */
 const userLogIn = async () => {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
@@ -13,21 +14,20 @@ const userLogIn = async () => {
     user.login();
 }
 
+/**
+ * ログインフォームが送信されたときに実行される関数
+ */
 document.querySelector('#login-form').addEventListener('submit', e => {
     e.preventDefault();
     userLogIn();
 })
 
+/**
+ * サンプルユーザーデータをローカルストレージに保存する関数
+ */
 const storeSampleUserData = async () => {
     const data = await fetchData();
     localStorage.setItem('users', JSON.stringify(data));
-}
-
-const createLogoutButton = (user) => {
-    LogoutButton.attributes.removeNamedItem('hidden');
-    LogoutButton.addEventListener('click', () => {
-        user.logout();
-    })
 }
 
 window.onload = () => {
@@ -39,10 +39,4 @@ window.onload = () => {
         storeSampleUserData();
     }
 
-    // ログインユーザーが存在する場合、ログアウトボタンを表示
-    if (sessionStorage.getItem('login_user')) {
-        const classfiedUser = createUserClassFromEmail(sessionStorage.getItem('login_user'));
-        createLogoutButton(classfiedUser);
-    }
-    
 }

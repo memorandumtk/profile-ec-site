@@ -75,17 +75,6 @@ function createRowDiv() {
 
 
 window.onload = async () => {
-    const isUserLoggedIn = sessionStorage.getItem('login_user');
-
-    // Temporary commented out.
-    //// ログインしていない場合、ログインページにリダイレクト
-    // if (!isUserLoggedIn) {
-    //     window.location.href = '/login.html';
-    // }
-
-    // Temporary, automatically login.
-    sessionStorage.setItem('login_user', 'test@mail.com');
-
 
     // 植物サンプルデータをセッションストレージに保存する関数を呼出し、データを保持。
     const plantsData = await storeSamplePlantsData();

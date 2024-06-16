@@ -1,4 +1,5 @@
 import fetchUserData from "../utils/fetchJson.js";
+import { updateUserDataOnLocalStorage } from "../utils/updateUserDataOnLocalStorage.js";
 
 class User {
 
@@ -15,13 +16,11 @@ class User {
      * ユーザーを登録するためのメソッド。
      */
     register() {
-
         try {
             let users = JSON.parse(localStorage.getItem('users')) || [];
 
             // ユーザーが存在しない場合、新しいユーザーを追加。ログインでも使うverifyUserメソッドを使って、ユーザーが存在するかどうかを確認。verifyUserがfalseを返す場合、emailは存在しないため、新しいユーザーを追加できる。
             if (!this.verifyUser(users)) {
-
                 const newUser = {
                     id: users.length + 1,
                     email: this.email,
@@ -56,16 +55,19 @@ class User {
         const data = JSON.parse(localStorage.getItem('users'));
         console.log(data);
 
-        let isTheUserVerified = this.verifyUser(data);
+        // ユーザーが認証されたかどうかを確認するために、verifyUserメソッドを呼び出す。
+        // 正しく認証された場合は、そのユーザ情報が返されるため、その情報を変数に保存。
+        const verifiedUser = this.verifyUser(data);
 
         // ユーザーが認証されたかどうかを確認。
-        if (isTheUserVerified) {
-            console.log('User is verified');
+        if (verifiedUser) {
+            // ユーザーが認証された場合、`is_logged_in`フラグをtrueに設定。
+            verifiedUser.is_logged_in = true;
+            updateUserDataOnLocalStorage(verifiedUser);
             // ユーザーが認証された場合、セッションを保存。
             this.storeUserDataToSession();
             // ログイン後のページにリダイレクト。
             window.location.href = '/home.html';
-
         } else {
             console.log('User is not verified');
         }
@@ -84,7 +86,7 @@ class User {
         for (let user of data) {
             if (user.email === this.email && user.password === this.password) {
                 isVerifiyingSuccessful = true;
-                break;
+                return user;
             }
         }
 
@@ -92,7 +94,7 @@ class User {
             console.log('Email or password is incorrect or user does not exist.');
         }
 
-        return isVerifiyingSuccessful;
+        return false;
     }
 
     /**
@@ -107,6 +109,9 @@ class User {
      * ユーザーのログアウトを行うためのメソッド。
      */
     logout() {
+        // ユーザの`is_logged_in`フラグをfalseに設定。
+        this.is_logged_in = false;
+        updateUserDataOnLocalStorage(this);
         // セッションストレージからログインユーザーを削除。
         sessionStorage.removeItem('login_user');
         // ログアウト後のページにリダイレクト。
