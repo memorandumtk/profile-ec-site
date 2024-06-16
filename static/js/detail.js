@@ -1,7 +1,7 @@
 import Plant from './classes/PlantClass.js';
 import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import User from './classes/UserClass.js';
-import { updateUserDataFromLocalStorage } from './utils/updateUserDataFromLocalStorage.js';
+import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
 
 const productImage = document.querySelector('#product-image');
 const productName = document.querySelector('#product-name');
@@ -54,7 +54,7 @@ function handleLikeIconClick(user) {
         productLikedIcon.classList.add('fa-star');
         user.liked_products.push(productCode.textContent);
     }
-    updateUserDataFromLocalStorage(user);
+    updateUserDataOnLocalStorage(user);
     console.log(user);
 }
 
@@ -116,7 +116,7 @@ function addToCart(user) {
     console.log(user);
 
     // ユーザ情報の更新
-    updateUserDataFromLocalStorage(user);
+    updateUserDataOnLocalStorage(user);
 
     // カートページにリダイレクト
     window.location.href = '/cart.html';

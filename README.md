@@ -32,3 +32,7 @@
 4. 数量を変更するとその変更後の値がログイン中のユーザのデータに反映される。`handleQuantityChange`
 5. `displayCartList`関数によってカート内の情報を要約したリストが表示される。
 6. もしも、数量の変更や商品の削除が行われた場合は、`redisplayCartList`関数が呼び出され、カートの内容をまとめた表示部分がアップデートされる。
+
+## お問い合わせ画面(inquiry.html)
+1. `formDisplay`関数を使って、もしもユーザがログインしていたら、名前とEmail用inputにフルネームとEmailを入力するようにする。
+2. `handleInquiryFormSubmit`関数でフォームがサブミットされた場合の処理を行う。`new FormData()`コンストラクタを使用してform内のデータをnameとvalueのkey-valueペアの形で取得できるようにする。

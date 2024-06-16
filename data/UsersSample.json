@@ -52,6 +52,12 @@
         "quantity": 2,
         "image_url": "https://bs.plantnet.org/image/o/53c73903dc455a3d734b193dad7d9d8c4ec0e324"
       }
+    ],
+    "inquiry_history": [
+      {
+        "inquiry_content": "test-inquiry",
+        "status": "draft"
+      }
     ]
   }
 ]

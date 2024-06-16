@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>お問い合わせ</title>
 
     <!-- BootStrap用CSSをインポート -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -13,18 +13,37 @@
 </head>
 
 <body>
-    This is home page.
 
-    <a href="/lists.html">lists.html</a>
-    <a href="/cart.html">cart.html</a>
-    <a href="/home.html">home.html</a>
-    <a href="/login.html">login.html</a>
-    <a href="/register.html">register.html</a>
-    <a href="/inquiry.html">inquiry.html</a>
+    <main>
+
+        <h1>お問い合わせ</h1>
+
+        <form id="inquiry-form">
+
+            <div>
+                <label for="inquiry-name">お名前</label>
+                <input type="text" id="inquiry-name" name="inquiry-name" placeholder="お名前" />
+            </div>
+
+            <div>
+                <label for="inquiry-email">メールアドレス</label>
+                <input type="email" id="inquiry-email" name="inquiry-email" placeholder="メールアドレス" />
+            </div>
+
+            <div>
+                <label for="inquiry-text">お問い合わせ内容</label>
+                <textarea id="inquiry-text" name="inquiry-text" placeholder="お問い合わせ内容"></textarea>
+            </div>
+
+
+            <button type="submit">送信</button>
+        </form>
+
+    </main>
 
     <!-- JavaScriptをインポート -->
     <!-- このscriptタグがこの位置にある理由: JSコードがHTMLレンダリングに依存する場合、すべてレンダリングされてからJSコードが実行されるようにするため。 -->
-    <script src="./static/js/home.js" type="module"></script>
+    <script src="./static/js/inquiry.js" type="module"></script>
 
     <!-- BootStrap用JSをインポート -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

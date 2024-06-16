@@ -2,7 +2,7 @@
 import Plant from './classes/PlantClass.js';
 import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import User from './classes/UserClass.js';
-import { updateUserDataFromLocalStorage } from './utils/updateUserDataFromLocalStorage.js';
+import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
 
 const cartProduct = document.querySelector('#cart-products');
 const cartSummaryDiv = document.querySelector('#cart-summary');
@@ -38,7 +38,7 @@ function handleQuantityChange(user, productId, quantity) {
     });
     user.products_in_cart = newProducts;
     console.log(user);
-    updateUserDataFromLocalStorage(user);
+    updateUserDataOnLocalStorage(user);
     redisplayCartList(user);
 }
 
@@ -49,7 +49,7 @@ function handleDeleteProductFromCart(user, productId){
     const newProducts = products.filter(product => product.id !== productId);
     user.products_in_cart = newProducts;
     console.log(user);
-    updateUserDataFromLocalStorage(user);
+    updateUserDataOnLocalStorage(user);
     redisplayCartList(user);
 }
 
@@ -77,7 +77,7 @@ function handlePurchase(user) {
     console.log(user);
 
     // ユーザ情報の更新
-    updateUserDataFromLocalStorage(user);
+    updateUserDataOnLocalStorage(user);
 }
 
 /**

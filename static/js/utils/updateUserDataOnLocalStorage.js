@@ -1,8 +1,9 @@
 
 /**
  * ローカルストレージから取得したログインユーザーのカートに商品を追加し、ローカルストレージに再度保存する。
+ * @param {Object} user - ログインユーザー
  */
-export function updateUserDataFromLocalStorage(user) {
+export function updateUserDataOnLocalStorage(user) {
     const users = JSON.parse(localStorage.getItem('users'));
     const index = users.findIndex(user => user.email === user.email);
     users[index] = user;

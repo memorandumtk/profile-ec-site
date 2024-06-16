@@ -14,7 +14,9 @@ export function createUserClassFromEmail(email) {
         const user = userData.find(user => user.email === email);
 
         if (user){
-            return Object.assign(new User(), user);
+            const classfiedUser = Object.assign(new User(), user);
+            classfiedUser.is_logged_in = true;
+            return classfiedUser;
         } else {
             console.log('User not found');
         }
