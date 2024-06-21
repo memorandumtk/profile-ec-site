@@ -10,19 +10,36 @@
     "is_logged_in": false,
     "purchase_history": [
       {
-        "product_name": "product1",
-        "quantity": 1,
-        "price": 100
+        "2024-01-02":[
+          {
+            "product_name": "Evergreen oak",
+            "quantity": 1,
+            "price": 100
+          }
+        ]
       },
       {
-        "product_name": "product2",
-        "quantity": 2,
-        "price": 200
+        "2024-02-03": [
+          {
+            "product_name": "Milfoil",
+            "quantity": 2,
+            "price": 200
+          },
+          {
+            "product_name": "Dutch clover",
+            "quantity": 4,
+            "price": 300
+          }
+        ]
       },
       {
-        "product_name": "product3",
-        "quantity": 3,
-        "price": 300
+        "2024-04-10": [
+          {
+            "product_name": "product3",
+            "quantity": 3,
+            "price": 300
+          }
+        ]
       }
     ],
     "liked_products": [

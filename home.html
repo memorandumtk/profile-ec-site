@@ -58,14 +58,15 @@
                         <a id="logout" class="nav-link" href="/login.html">ログアウト</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle user-email-dropdown" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle user-email-dropdown" href="#" id="dropdownId"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <!-- ユーザのEmailが入る -->
                         </a>
                         <!-- ここは、ユーザ関連のリンクにしてもいいかも -->
-                            <div class="dropdown-menu" aria-labelledby="dropdownId">
-                                <a class="dropdown-item" href="#">Action 1</a>
-                                <a class="dropdown-item" href="#">Action 2</a>
-                            </div>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="#">Action 1</a>
+                            <a class="dropdown-item" href="#">Action 2</a>
+                        </div>
                     </li>
                 </ul>
                 <form class="d-flex my-2 my-lg-0">
@@ -80,69 +81,39 @@
 
     This is home page.
 
+    <!-- 商品いいね数の上位3位を表示するカルーセル -->
     <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
         <ol class="carousel-indicators">
-            <li
-                data-bs-target="#carouselId"
-                data-bs-slide-to="0"
-                class="active"
-                aria-current="true"
-                aria-label="First slide"
-            ></li>
-            <li
-                data-bs-target="#carouselId"
-                data-bs-slide-to="1"
-                aria-label="Second slide"
-            ></li>
-            <li
-                data-bs-target="#carouselId"
-                data-bs-slide-to="2"
-                aria-label="Third slide"
-            ></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="First slide"></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="2" aria-label="Third slide"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-                <img
-                    src=""
-                    class="w-100 d-block"
-                    alt="First slide"
-                />
+                <img src="" class="w-100 d-block" alt="First slide" />
             </div>
             <div class="carousel-item">
-                <img
-                    src=""
-                    class="w-100 d-block"
-                    alt="Second slide"
-                />
+                <img src="" class="w-100 d-block" alt="Second slide" />
             </div>
             <div class="carousel-item">
-                <img
-                    src=""
-                    class="w-100 d-block"
-                    alt="Third slide"
-                />
+                <img src="" class="w-100 d-block" alt="Third slide" />
             </div>
         </div>
-        <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselId"
-            data-bs-slide="prev"
-        >
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselId"
-            data-bs-slide="next"
-        >
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    
+
+    <!-- 購入履歴を表示するテーブル -->
+    <div id="purchase-history-cards" class="card-group">
+        <!-- ここに購入履歴が表示される -->
+    </div>
 
 
     <!-- JavaScriptをインポート -->
