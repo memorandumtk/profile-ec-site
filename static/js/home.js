@@ -26,8 +26,12 @@ function displayPlantsOnCarousel(plants) {
         if (index < 3) {
             const plant = plants[index];
             const img = item.querySelector('img');
-
             img.src = plant.image_url;
+
+            const anchor = item.querySelector('a');
+            if (anchor) {
+                anchor.href = `detail.html?slug=${plant.slug}`;
+            }
         }
     });
 }
@@ -46,13 +50,28 @@ function generateErrorPurchaseItemHTML() {
 }
 
 /**
+ * 購入アイテムの画像とリンクを生成する関数
+ */
+function generatePurchaseItemImgAndLink(classfiedPlant) {
+
+    return `
+        <a href="detail.html?slug=${classfiedPlant.slug}">
+            <img 
+                src="${classfiedPlant.image_url}" 
+                class="rounded rounded-1 border border-0"
+                alt="${classfiedPlant.name}"
+                style="width: 100px; height: 100px;"
+            >
+        </a>
+    `;
+}
+
+/**
  * 購入アイテムごとのHTMLを生成する関数。
  * @param {*} item
  * @returns 
  */
 function generatePurchaseItemHTML(classfiedPlant, item) {
-    console.log('classsified', classfiedPlant);
-    console.log('purchase item', item)
     if (!classfiedPlant || !item) {
         return generateErrorPurchaseItemHTML();
     };
@@ -63,11 +82,16 @@ function generatePurchaseItemHTML(classfiedPlant, item) {
     }
 
     return `
-        <li class="purchase-item list-group-item">
-            <div class="card-title">Product Name: ${item.name}</div>
-            <div class="card-text">Quantity: ${item.quantity}</div>
-            <div class="card-text">Price: $${item.price}</div>
-        </li>
+        <div class="d-flex flex-row w-100 mb-1 rounded rounded-1 border-bottom border-1">
+            <div class="purchase-item list-group-item flex-grow-1 border-0">
+                <div class="card-title">Product Name: ${classfiedPlant.japanese_name}</div>
+                <div class="card-text">Quantity: ${classfiedPlant.quantity}</div>
+                <div class="card-text">Price: $${classfiedPlant.price}</div>
+            </div>
+            <div>
+                ${classfiedPlant.image_url ? generatePurchaseItemImgAndLink(classfiedPlant) : ''}
+            </div>
+        </div>
     `;
 }
 
@@ -88,14 +112,16 @@ function generatePurchaseDateHTML(items, index) {
             itemsHTML += generatePurchaseItemHTML(classifiedPlant, itemData);
         })
     });
+    // 「01. 2024-04-10」のように表示するように。
+    const indexForDisplay = String(index + 1).padStart(2, '0');
 
     return `
-        <div class="purchase-date card border-secondary mb-3">
-            <h3 class="card-header">${date[0]}</h3>
+        <div class="purchase-date card border-secondary">
+            <h3 class="card-header bg-transparent">${indexForDisplay + '. ' + date[0]}</h3>
             <div class="card-body">
-                <ul class="list-group list-group-flush">
+                <div class="list-group list-group-flush">
                     ${itemsHTML}
-                </ul>
+                </div>
             </div>
         </div>
     `;
@@ -107,10 +133,13 @@ function generatePurchaseDateHTML(items, index) {
  */
 function displayPurchaseHistory(user) {
     const purchaseHistory = user.purchase_history;
+    const orderdPurchaseHistory = purchaseHistory.sort((a, b) => new Date(Object.keys(b)) - new Date(Object.keys(a)));
 
     let purchaseHistoryHTML = '';
 
-    purchaseHistory.forEach((data, index) => {
+    orderdPurchaseHistory.forEach((data, index) => {
+        // 購入履歴を3件まで表示するように。
+        if (index > 2) return;
         purchaseHistoryHTML += generatePurchaseDateHTML(data, index);
     });
 
@@ -130,7 +159,6 @@ window.onload = async () => {
 
     // ユーザがログインしていれば購入履歴を表示する関数を呼び出す。
     if (classfiedUser && classfiedUser.is_logged_in) {
-        // displayPurchaseHistory(classfiedUser);
         displayPurchaseHistory(classfiedUser);
     }
 
