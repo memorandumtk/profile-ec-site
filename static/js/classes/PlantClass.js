@@ -11,6 +11,7 @@ class Plant {
         this.stock = stock;
         this.slug = slug;
         this.number_of_liked = number_of_liked;
+        this.quantity = 1;
     }
 
 
@@ -93,6 +94,13 @@ class Plant {
             image_url: this.image_url,
             quantity: quantity,
         }
+    }
+
+    /**
+     * 商品の合計金額を計算するメソッド。
+     */
+    calculateTotalPrice(quantity = this.quantity) {
+        return this.price * quantity;
     }
 }
 
