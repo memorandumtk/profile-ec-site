@@ -7,12 +7,14 @@ const productImage = document.querySelector('#product-image');
 const productName = document.querySelector('#product-name');
 const productPrice = document.querySelector('#product-price');
 const totalPrice = document.querySelector('#total-price');
+const totalPriceDiv = document.querySelector('#total-price-div');
 const productQuantity = document.querySelector('#product-quantity');
-const productPriceAndQuantity = document.querySelector('#product-price-and-quantity');
 const productDescription = document.querySelector('#product-description');
 const productCode = document.querySelector('#product-code');
 const productLikedIcon = document.querySelector('#liked-icon');
-
+const twitterShareButton = document.querySelector('#twitter-share-button');
+const facebookShareButton = document.querySelector('#facebook-share-button');
+const lineShareButton = document.querySelector('#line-share-button');
 
 
 /**
@@ -33,13 +35,49 @@ function createclassifiedData(plantsData) {
     const plants = JSON.parse(localStorage.getItem('plants'));
 
     plants.map((plant, index) => {
-        let classifiedPlant = Object.assign(new Plant(), plant);
+        let classifiedPlant = new Plant()
+
+        Object.assign(classifiedPlant, plant);
 
         plantsData.push(classifiedPlant);
     });
 
     return plantsData;
 }
+
+/**
+ * URLを取得する関数
+ */
+function getUrl() {
+    const url = window.location.href;
+    return url;
+}
+
+/**
+ * SNSシェア用リンクを作成し埋め込む関数 Twitter
+ */
+function createLinkToShareTwitter() {
+    const anchor = twitterShareButton.querySelector('a');
+    anchor.href = `https://twitter.com/share?url=${getUrl()}&text=この商品がおすすめ!:${productName.textContent}`;
+    anchor.target = '_blank';
+}
+/**
+ * SNSシェア用リンクを作成し埋め込む関数 Facebook
+ */
+function createLinkToShareFacebook() {
+    const anchor = facebookShareButton.querySelector('a');
+    anchor.href = `https://www.facebook.com/sharer/sharer.php?u=${getUrl()}`;
+    anchor.target = '_blank';
+}
+/**
+ * SNSシェア用リンクを作成し埋め込む関数 LINE
+ */
+function createLinkToShareLINE() {
+    const anchor = lineShareButton.querySelector('a');
+    anchor.href = `https://social-plugins.line.me/lineit/share?url=${getUrl()}&text=この商品がおすすめ!${productName.textContent}`;
+    anchor.target = '_blank';
+}
+
 
 /**
  * いいね（スターアイコン）がクリックされたときに実行される関数
@@ -77,16 +115,19 @@ function displayProductInfo(plant, user) {
     productLikedIcon.addEventListener('click', () => {
         handleLikeIconClick(user);
     });
-    productPrice.textContent = plant.price;
     productDescription.textContent = plant.description;
-    totalPrice.textContent = plant.price;
-    productPrice.textContent = plant.price;
-    productCode.textContent = plant.id;
-    productPriceAndQuantity.classList.add('d-flex', 'justify-content-center', 'align-items-center')
-
     productQuantity.value = 1;
+    totalPrice.textContent = plant.addYenMarkToPrice(plant.addCommaToPrice(plant.price * productQuantity.value));
+    productPrice.textContent = plant.addYenMarkToPrice();
+    productCode.textContent = plant.id;
+
     productQuantity.addEventListener('change', () => {
-        totalPrice.textContent = plant.price * productQuantity.value;
+        if (productQuantity.value < 1) {
+            totalPriceDiv.classList.add('d-none');
+        } else if (productQuantity.value >= 1) {
+            totalPriceDiv.classList.remove('d-none');
+        }
+        totalPrice.textContent = plant.addYenMarkToPrice(plant.addCommaToPrice(plant.price * productQuantity.value));
     })
 }
 
@@ -94,27 +135,22 @@ function displayProductInfo(plant, user) {
 /**
  * カートに商品を追加する関数で、「カートに入れる」ボタンをクリックしたときに実行される。
  */
-function addToCart(user) {
-    const product = {
-        id: productCode.textContent,
-        japanese_name: productName.textContent,
-        price: productPrice.textContent,
-        quantity: productQuantity.value,
-        image_url: productImage.src,
-    }
+function addToCart(plant, user) {
+    // Plantクラスのメソッドを使い、カートに追加する商品の情報を作成する
+    const cartItem = plant.createCartItem(productQuantity.value);
 
     const cart = user.products_in_cart || [];
     // カートに商品が存在するかどうかを確認
     let isExist = false;
     // カートに商品が存在する場合、数量を更新する
-    cart.map((product, index) => {
-        if (product.id === productCode.textContent) {
-            product.quantity = parseInt(product.quantity) + parseInt(productQuantity.value);
+    cart.forEach((product, index) => {
+        if (product.id === plant.id) {
+            product.quantity = parseInt(product.quantity) + parseInt(cartItem.quantity);
             isExist = true;
             return;
         }
     })
-    if (!isExist) cart.push(product); // カートに商品が存在しない場合、商品を追加する
+    if (!isExist) cart.push(cartItem); // カートに商品が存在しない場合、商品を追加する
     console.log(user);
 
     // ユーザ情報の更新
@@ -150,7 +186,11 @@ window.addEventListener('load', () => {
 
     const cartButton = document.querySelector('#cart-button');
     cartButton.addEventListener('click', () => {
-        addToCart(classfiedUser);
+        addToCart(plant, classfiedUser);
     });
 
+    // SNSシェア用リンクを作成し、リンクをanchorタグに設定する
+    createLinkToShareTwitter();
+    createLinkToShareFacebook(); 
+    createLinkToShareLINE();
 });

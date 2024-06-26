@@ -67,6 +67,33 @@ class Plant {
         }
     }
 
+    /**
+     * 商品の値段にカンマ区切りをつけるメソッド。
+     */
+    addCommaToPrice(price = this.price) {
+        return price.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    }
+
+    /**
+     * 商品の値段に￥マークをつけるメソッド。
+     */
+    addYenMarkToPrice(price = this.addCommaToPrice()) {
+        return `¥${price}`;
+    }
+
+    /**
+     * 商品をカートに追加するときにカートに入れるオブジェクトを作成するメソッド。
+     */
+    createCartItem(quantity = 1) {
+        return {
+            id: this.id,
+            name: this.name,
+            japanese_name: this.japanese_name,
+            price: this.price,
+            image_url: this.image_url,
+            quantity: quantity,
+        }
+    }
 }
 
 export default Plant;
