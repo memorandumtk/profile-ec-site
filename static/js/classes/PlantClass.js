@@ -97,6 +97,21 @@ class Plant {
     }
 
     /**
+     * 商品が購入された時に購入履歴に追加するオブジェクトを作成するメソッド。
+     * createCartItemと2024/6/25時点では同じだが、後々区別化できるかもしれないので別メソッドとして定義。quantityのデフォルト値はcreateCartItemと異なる。
+     */
+    createPurchaseItem(quantity = this.quantity) {
+        return {
+            id: this.id,
+            name: this.name,
+            japanese_name: this.japanese_name,
+            price: this.price,
+            image_url: this.image_url,
+            quantity: quantity,
+        }
+    }
+
+    /**
      * 商品の合計金額を計算するメソッド。
      */
     calculateTotalPrice(quantity = this.quantity) {

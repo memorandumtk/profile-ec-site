@@ -3,6 +3,7 @@ import Plant from './classes/PlantClass.js';
 import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import User from './classes/UserClass.js';
 import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
+import { getFormattedDate } from './utils/getFormattedDate.js';
 
 const cartProduct = document.querySelector('#cart-products');
 const cartSummaryDiv = document.querySelector('#cart-summary');
@@ -18,7 +19,7 @@ function createClassifiedProduct(product) {
     classifiedProduct = Object.assign(classifiedProduct, product)
 
     return classifiedProduct;
-} 
+}
 
 /**
  * 商品をクラス化する関数 (Arrayごと)
@@ -64,12 +65,38 @@ function handleQuantityChange(user, product, quantity) {
 /**
  * 「削除」ボタンをクリックしたときに実行される関数で、カートから商品を削除する。
  */
-function handleDeleteProductFromCart(user, product, products){
+function handleDeleteProductFromCart(user, product, products) {
     const newProducts = products.filter(p => p.id !== product.id);
     user.products_in_cart = newProducts;
     console.log(user);
     updateUserDataOnLocalStorage(user);
     redisplayCartList(user);
+}
+
+/**
+ * `puprchase_history`に保存するオブジェクトを作成する関数。
+ */
+function createPurchaseObject(products) {
+    const currentDate = new Date().valueOf();
+    const purchaseObject = { [currentDate]: products };
+    return purchaseObject;
+}
+
+/**
+ * カートの商品をユーザの`puprchase_history`に商品を追加する関数。
+ */
+function addProductsToPurchaseHistory(user, products) {
+
+    const purchaseObject = createPurchaseObject(products);
+    // 分岐を作ったが、一旦処理は同じになっている。
+    if (user.purchase_history.length === 0) {
+        user.purchase_history.push(purchaseObject);
+    } else if (user.purchase_history.length > 0) {
+        user.purchase_history.push(purchaseObject);
+    }
+    console.log(user);
+
+    updateUserDataOnLocalStorage(user);
 }
 
 /**
@@ -79,24 +106,20 @@ function handlePurchase(user, products) {
     const purchaseList = []; // 今回の購入リスト
 
     products.map((product, index) => {
-        const purchase = {
-            id: product.id,
-            japanese_name: product.japanese_name,
-            price: product.price,
-            quantity: product.quantity,
-            image_url: product.image_url,
-        };
-    
+        // Plantクラス内のメソッドを使い、購入リストに追加する商品の情報を作成する。
+        const purchase = product.createPurchaseItem(product.quantity);
+        // 購入リストに商品を追加
         purchaseList.push(purchase);
     })
 
-    const history = user.puprchase_history || [];
-    history.push(purchaseList);
-    user.purchase_history = history;
-    console.log(user);
+    addProductsToPurchaseHistory(user, purchaseList);
 
-    // ユーザ情報の更新
+    // カートの中身を空にする
+    user.products_in_cart = [];
     updateUserDataOnLocalStorage(user);
+
+    // ホーム画面に戻る
+    window.location.href = '/home.html';
 }
 
 /**
@@ -119,7 +142,7 @@ function displayCartList(user, products) {
     products.map((product, index) => {
         const productLi = document.createElement('li');
         productLi.classList.add('list-group-item', 'd-flex', 'justify-content-start', 'align-items-center');
-        
+
         const liDiv = document.createElement('div');
         liDiv.classList.add('ms-2', 'me-auto'); // スペースが数字との間に必要。
         // Plantクラス内のメソッドを使い、カート内の商品の合計金額を計算する。(productはPlantクラスのインスタンス)
@@ -127,10 +150,9 @@ function displayCartList(user, products) {
         liDiv.textContent = liText;
 
         totalPrice += product.calculateTotalPrice();
-        
+
         productLi.appendChild(liDiv);
         cartListUl.appendChild(productLi);
-
     });
 
     cartSummaryDiv.appendChild(cartListUl);
@@ -255,7 +277,8 @@ window.addEventListener('load', () => {
     displayCartList(classfiedUser, classifiedProducts);
 
     const purchaseButton = document.querySelector('#purchase-button');
-    purchaseButton.addEventListener('click', () => {
+    purchaseButton.addEventListener('click', (e) => {
+        e.preventDefault();
         handlePurchase(classfiedUser, classifiedProducts);
     });
 

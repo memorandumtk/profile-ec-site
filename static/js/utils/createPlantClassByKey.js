@@ -8,7 +8,6 @@ import Plant from '../classes/PlantClass.js';
  */
 export function createPlantClassByKey(valueOfkey, key=id) {
     const plantData = JSON.parse(localStorage.getItem('plants'));
-    console.log('plantData', plantData);
 
     // ローカルストレージに植物データがある場合、植物データからidを検索して植物情報を取得
     if (plantData) {

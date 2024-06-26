@@ -10,7 +10,7 @@
     "is_logged_in": false,
     "purchase_history": [
       {
-        "2024-01-02":[
+        "1719274052216":[
           {
             "product_name": "Evergreen oak",
             "quantity": 1,
@@ -19,7 +19,7 @@
         ]
       },
       {
-        "2024-02-03": [
+        "1719374162016": [
           {
             "product_name": "Milfoil",
             "quantity": 2,
@@ -33,7 +33,7 @@
         ]
       },
       {
-        "2024-04-10": [
+        "1719275052016": [
           {
             "product_name": "product3",
             "quantity": 3,

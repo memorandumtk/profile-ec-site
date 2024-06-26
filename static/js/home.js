@@ -2,6 +2,7 @@ import fetchData from "./utils/fetchJson.js";
 import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
 import { createPlantClassByKey } from "./utils/createPlantClassByKey.js";
+import { getFormattedDate } from "./utils/getFormattedDate.js";
 
 const carouselItems = document.querySelectorAll('.carousel-item');
 const purchaseHistoryCards = document.querySelector('#purchase-history-cards');
@@ -104,20 +105,21 @@ function generatePurchaseItemHTML(classfiedPlant, item) {
  */
 function generatePurchaseDateHTML(items, index) {
     let itemsHTML = '';
-    // dateのキーデータを取得する。dateキーは1つしかないがArrayになる。例：["2024-01-02"]
+    // kyesメソッドを使って、dateのキーデータを取得する。dateキーは1つしかないがArrayになる。例：["1719375844616"]
     const date = Object.keys(items);
     date.forEach(date => {
         items[date].forEach(itemData => {
-            const classifiedPlant = createPlantClassByKey(itemData.product_name, 'name');
+            const classifiedPlant = createPlantClassByKey(itemData.name, 'name');
             itemsHTML += generatePurchaseItemHTML(classifiedPlant, itemData);
         })
     });
     // 「01. 2024-04-10」のように表示するように。
+    const dateForDisplay = getFormattedDate(date[0], 1);
     const indexForDisplay = String(index + 1).padStart(2, '0');
 
     return `
         <div class="purchase-date card border-secondary">
-            <h3 class="card-header bg-transparent">${indexForDisplay + '. ' + date[0]}</h3>
+            <h3 class="card-header bg-transparent">${indexForDisplay + '. ' + dateForDisplay}</h3>
             <div class="card-body">
                 <div class="list-group list-group-flush">
                     ${itemsHTML}
@@ -133,7 +135,7 @@ function generatePurchaseDateHTML(items, index) {
  */
 function displayPurchaseHistory(user) {
     const purchaseHistory = user.purchase_history;
-    const orderdPurchaseHistory = purchaseHistory.sort((a, b) => new Date(Object.keys(b)) - new Date(Object.keys(a)));
+    const orderdPurchaseHistory = purchaseHistory.sort((a, b) => Object.keys(b) - Object.keys(a));
 
     let purchaseHistoryHTML = '';
 
