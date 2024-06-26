@@ -118,6 +118,37 @@ class User {
         window.location.href = '/login.html';
     }
 
+    /**
+     * いいねを増やすメソッド。
+     */
+    addLike(plantId) {
+        // いいねを追加。
+        this.liked_products.push(plantId);
+        updateUserDataOnLocalStorage(this);
+    }
+
+    /**
+     * いいねを減らすメソッド。
+     */
+    reduceLike(plantId) {
+        this.liked_products = this.liked_products.filter(likedPlant => likedPlant !== plantId);
+        updateUserDataOnLocalStorage(this);
+    }
+
+    /**
+     * いいねの数を調整するメソッド
+     */
+    toggleLike(plantId) {
+        // ユーザーがいいねをしているかどうかを確認。
+        if (this.liked_products.includes(plantId)) {
+            // いいねを削除。
+            this.reduceLike(plantId);
+        } else {
+            // いいねを追加。
+            this.addLike(plantId);
+        }
+        console.log(this);
+    }
 }
 
 export default User;

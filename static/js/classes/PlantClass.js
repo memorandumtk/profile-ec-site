@@ -13,43 +13,6 @@ class Plant {
         this.number_of_liked = number_of_liked;
     }
 
-    /**
-     * 入力されたデータからカード（Bootstrap）を作成する関数。
-     */
-    createCard(plantData) {
-        const card = document.createElement('div');
-        card.classList.add('card');
-
-        const cardImg = document.createElement('img');
-        cardImg.classList.add('card-img-top');
-        cardImg.src = plantData.image_url;
-        cardImg.alt = plantData.name;
-
-        const cardBody = document.createElement('div');
-        cardBody.classList.add('card-body');
-
-        const cardTitle = document.createElement('h5');
-        cardTitle.classList.add('card-title');
-        cardTitle.textContent = plantData.japanese_name;
-
-        const cardText = document.createElement('p');
-        cardText.classList.add('card-text');
-        cardText.textContent = plantData.description;
-
-        const cardButton = document.createElement('a');
-        cardButton.classList.add('btn', 'btn-primary');
-        cardButton.href = 'detail.html?slug=' + plantData.slug;
-        cardButton.textContent = '詳細';
-
-        cardBody.appendChild(cardTitle);
-        cardBody.appendChild(cardText);
-        cardBody.appendChild(cardButton);
-
-        card.appendChild(cardImg);
-        card.appendChild(cardBody);
-
-        return card;
-    }
 
     /**
      * colをクラスに持つdiv要素を作成するメソッド。
@@ -71,6 +34,38 @@ class Plant {
         return rowDiv;
     }
 
+    /**
+     * いいねの数を追加するメソッド。
+     */
+    addLike() {
+        this.number_of_liked += 1;
+    }
+
+    /**
+     * いいねの数を減らすメソッド。
+     */
+    removeLike() {
+        this.number_of_liked -= 1;
+    }
+
+    /**
+     * いいねボタンのトグルメソッド。
+     */
+    toggleLike(event) {
+        event.preventDefault();
+        const likeButton = event.target;
+        if (likeButton.classList.contains('btn-primary')) {
+            likeButton.classList.remove('btn-primary');
+            likeButton.classList.add('btn-danger');
+            likeButton.textContent = 'お気に入りから削除';
+            this.addLike();
+        } else {
+            likeButton.classList.remove('btn-danger');
+            likeButton.classList.add('btn-primary');
+            likeButton.textContent = 'お気に入りに追加';
+            this.removeLike();
+        }
+    }
 
 }
 

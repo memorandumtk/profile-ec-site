@@ -48,11 +48,13 @@ function handleLikeIconClick(user) {
     if (productLikedIcon.classList.contains('fa-star')) {
         productLikedIcon.classList.remove('fa-star');
         productLikedIcon.classList.add('fa-star-o');
-        user.liked_products = user.liked_products.filter(product => product !== productCode.textContent);
+        // textContentはstring型なので、Number型に変換する。
+        user.liked_products = user.liked_products.filter(product => product !== Number(productCode.textContent));
     } else {
         productLikedIcon.classList.remove('fa-star-o');
         productLikedIcon.classList.add('fa-star');
-        user.liked_products.push(productCode.textContent);
+        // textContentはstring型なので、Number型に変換する。
+        user.liked_products.push(Number(productCode.textContent));
     }
     updateUserDataOnLocalStorage(user);
     console.log(user);
@@ -65,7 +67,7 @@ function displayProductInfo(plant, user) {
     console.log(plant.japanese_name);
     productImage.src = plant.image_url;
     productName.textContent = plant.japanese_name;
-    if (user.liked_products.includes(plant.id.toString())) {
+    if (user.liked_products.includes(plant.id)) {
         productLikedIcon.classList.add('fa', 'fa-star');
         console.log('liked');
     } else {
