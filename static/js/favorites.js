@@ -2,58 +2,40 @@ import fetchData from "./utils/fetchJson.js";
 import Plant from "./classes/PlantClass.js";
 import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
+import { storeSamplePlantsDataToLocalStorage } from './utils/storeSamplePantsDataToLocalStorage.js';
+import { createClassifiedProducts } from "./utils/createClassifiedProducts.js";
+import { createPlantClassByKey } from "./utils/createPlantClassByKey.js";
 
 const cardsContainer = document.getElementById('cards-container');
 
 /**
- * 植物サンプルデータをローカルストレージに保存し、データを返す関数。
+ * お気に入り商品がなかった場合にその旨のメッセージを表示する関数。
  */
-async function storeSamplePlantsDataToLocalStorage() {
-
-    const plantsData = await fetchData('/data/PlantsSample.json');
-    console.log(plantsData);
-
-    localStorage.setItem('plants', JSON.stringify(plantsData));
+function displayNoFavoritesMessage() {
+    const noFavoritesMessage = document.createElement('h2');
+    noFavoritesMessage.textContent = 'お気に入りに登録されている商品がありません。';
+    noFavoritesMessage.classList.add('text-center', 'text-muted', 'mt-5', 'w-100');
+    cardsContainer.appendChild(noFavoritesMessage);
 }
 
 /**
- * 植物データをローカルストレージから取得し、Plantクラスのインスタンスを作成し、メソッドを使いカードを作成する関数。
+ * メソッドを使いカードに見立てたリストを作成する関数。
  * @param {*} plantsData 
  * @returns 
  */
-function createclassifiedAndListsWithFavorites(likedPlants) {
-    let plantsData = [];
-    const plants = JSON.parse(localStorage.getItem('plants'));
+function createCardLists(plantsData, user = null) {
+    plantsData.map((plant, index) => {
 
-    // お気に入りの植物のみを表示するために、ユーザのliked_productとマッチするお気に入りの植物のみをフィルタリングする。
-    const filteredPlants = plants.filter((plant) => {
-        return likedPlants.includes(plant.id);
-    });
+        const card = plant.createCard(user);
 
-    let rowDiv;
-    filteredPlants.map((plant, index) => {
-        let classifiedPlant = Object.assign(new Plant(), plant);
-
-        // 1行ごとに3つのカードが表示されるように、3で割った余りが0のときのみrow用のDivを作成する。
-        if (index % 3 === 0) {
-            rowDiv = classifiedPlant.createRowDiv();
-        }
-
-        const card = classifiedPlant.createCard(classifiedPlant);
-
-        const colDiv = classifiedPlant.createColDiv();
+        // Plantクラスのメソッドを使い、colをクラスに持つdiv要素を作成する。
+        const colDiv = plant.createColDiv();
 
         colDiv.appendChild(card);
-        rowDiv.appendChild(colDiv);
 
-        cardsContainer.appendChild(rowDiv);
-
-        plantsData.push(classifiedPlant);
+        cardsContainer.appendChild(colDiv);
     });
-
-    return plantsData;
 }
-
 
 window.onload = async () => {
 
@@ -63,14 +45,29 @@ window.onload = async () => {
 
     console.log(classfiedUser)
 
-    // サンプルの植物データをローカルストレージに保存する。
-    await storeSamplePlantsDataToLocalStorage();
-    let classifiedPlants = [];
-    if (classfiedUser.liked_products.length > 0) {
-        classifiedPlants = createclassifiedAndListsWithFavorites(classfiedUser.liked_products);
+    // サンプルの植物データをローカルストレージから取得する。取得できない場合は、サンプルデータを保存する。
+    const plants = JSON.parse(localStorage.getItem('plants'));
+    if (!plants) {
+        await storeSamplePlantsDataToLocalStorage();
+        plants = JSON.parse(localStorage.getItem('plants'));
     }
 
-    console.log('Plants data from local storage and cleassified as Plant class:');
-    console.log(classifiedPlants);
+    let classifiedPlantsOfFavorites = [];
+    if (classfiedUser.liked_products.length > 0) {
+
+        // 関数を使って、植物データをPlantクラスのインスタンスに変換する。
+        classfiedUser.liked_products.forEach((likedProduct) => {
+            classifiedPlantsOfFavorites.push(createPlantClassByKey(likedProduct, 'id'));
+        });
+
+        // Plantクラスのメソッドを使い、カードを作成する関数を呼び出す。
+        createCardLists(classifiedPlantsOfFavorites, classfiedUser);
+
+    } else {
+        displayNoFavoritesMessage();
+    }
+
+    console.log('Favorites plants data and cleassified as Plant class:');
+    console.log(classifiedPlantsOfFavorites);
 
 }

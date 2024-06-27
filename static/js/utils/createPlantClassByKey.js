@@ -1,7 +1,7 @@
 import Plant from '../classes/PlantClass.js';
 
 /**
- * ローカルストレージに保存されている植物データからidを検索して植物情報を取得。
+ * ローカルストレージに保存されている植物データから指定されたKey値に合致するデータを検索して植物情報を取得。
  * @param {*} valueOfkey
  * @param {*} key
  * @returns classfiedPlant

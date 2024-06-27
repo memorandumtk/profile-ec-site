@@ -3,6 +3,7 @@ import Plant from "./classes/PlantClass.js";
 import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
 import { createPlantClassByKey } from "./utils/createPlantClassByKey.js";
+import { createClassifiedProducts } from "./utils/createClassifiedProducts.js";
 
 const cardsContainer = document.getElementById('cards-container');
 
@@ -19,11 +20,11 @@ async function storeSamplePlantsDataToLocalStorage() {
 
 
 /**
- * 入力されたデータからカード（Bootstrap）を作成する関数。
+ * 入力されたデータからカードに見立てた商品ごとのDIVを作成する関数。
  */
 function createCard(plantData, user = null) {
     const card = document.createElement('div');
-    card.classList.add('card');
+    card.classList.add('d-grid', 'border-0', 'p-2');
 
     const anchor = document.createElement('a');
     anchor.href = 'detail.html?slug=' + plantData.slug;
@@ -31,21 +32,19 @@ function createCard(plantData, user = null) {
     anchor.style.color = 'black';
 
     const cardImg = document.createElement('img');
-    cardImg.classList.add('card-img-top');
+    cardImg.classList.add('object-fit-cover', 'w-100', 'rounded');
     cardImg.style.height = '360px';
     cardImg.style.objectFit = 'cover';
     cardImg.src = plantData.image_url;
     cardImg.alt = plantData.name;
 
     const cardBody = document.createElement('div');
-    cardBody.classList.add('card-body');
+    cardBody.classList.add('d-flex', 'flex-column', 'align-items-start', 'p-2');
 
     const cardTitle = document.createElement('h5');
-    cardTitle.classList.add('card-title');
     cardTitle.textContent = plantData.japanese_name;
 
     const cardText = document.createElement('p');
-    cardText.classList.add('card-text');
     cardText.textContent = plantData.description;
 
     cardBody.appendChild(cardTitle);
@@ -78,36 +77,22 @@ function createCard(plantData, user = null) {
 }
 
 /**
- * 植物データをローカルストレージから取得し、Plantクラスのインスタンスを作成し、メソッドを使いカードを作成する関数。
+ * メソッドを使いカードに見立てたリストを作成する関数。
  * @param {*} plantsData 
  * @returns 
  */
-function createClassifiedPlandAndLists(plantsData, user = null) {
-    const plants = JSON.parse(localStorage.getItem('plants'));
+function createCardLists(plantsData, user = null) {
+    plantsData.map((plant, index) => {
 
-    let rowDiv;
-    plants.map((plant, index) => {
-        let classifiedPlant = Object.assign(new Plant(), plant);
+        const card = plant.createCard(user);
 
-        // // 1行ごとに3つのカードが表示されるように、3で割った余りが0のときのみrow用のDivを作成する。
-        // if (index % 3 === 0) {
-        //     rowDiv = classifiedPlant.createRowDiv();
-        // }
-
-        const card = createCard(classifiedPlant, user);
-
-        const colDiv = classifiedPlant.createColDiv();
+        // Plantクラスのメソッドを使い、colをクラスに持つdiv要素を作成する。
+        const colDiv = plant.createColDiv();
 
         colDiv.appendChild(card);
-        // rowDiv.appendChild(colDiv);
 
-        // cardsContainer.appendChild(rowDiv);
         cardsContainer.appendChild(colDiv);
-
-        plantsData.push(classifiedPlant);
     });
-
-    return plantsData;
 }
 
 
@@ -119,9 +104,18 @@ window.onload = async () => {
 
     console.log(classfiedUser)
 
-    await storeSamplePlantsDataToLocalStorage();
+    // サンプルの植物データをローカルストレージから取得する。取得できない場合は、サンプルデータを保存する。
+    const plants = JSON.parse(localStorage.getItem('plants'));
+    if (!plants) {
+        await storeSamplePlantsDataToLocalStorage();
+        plants = JSON.parse(localStorage.getItem('plants'));
+    }
 
-    const classifiedPlants = createClassifiedPlandAndLists([], classfiedUser);
+    // 関数を使って、植物データをPlantクラスのインスタンスに変換する。
+    const classifiedPlants = createClassifiedProducts(plants);
+
+    // Plantクラスのメソッドを使い、カードを作成する。
+    createCardLists(classifiedPlants, classfiedUser);
 
 
     console.log('Plants data from local storage and cleassified as Plant class:');

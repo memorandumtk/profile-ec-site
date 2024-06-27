@@ -4,36 +4,11 @@ import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import User from './classes/UserClass.js';
 import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
 import { getFormattedDate } from './utils/getFormattedDate.js';
+import { createClassifiedProduct, createClassifiedProducts } from './utils/createClassifiedProducts.js';
 
 const cartProduct = document.querySelector('#cart-products');
 const cartSummaryDiv = document.querySelector('#cart-summary');
 const totalPriceSpan = document.querySelector('#total-price');
-
-// let products = [];
-
-/**
- * 商品をクラス化する関数 (1つの商品)
- */
-function createClassifiedProduct(product) {
-    let classifiedProduct = new Plant();
-    classifiedProduct = Object.assign(classifiedProduct, product)
-
-    return classifiedProduct;
-}
-
-/**
- * 商品をクラス化する関数 (Arrayごと)
- */
-function createClassifiedProducts(productsData) {
-    let classifiedProducts = [];
-    productsData.map((product, index) => {
-        // 1つずつ商品をクラス化
-        const classifiedProduct = createClassifiedProduct(product);
-        classifiedProducts.push(classifiedProduct);
-    });
-    // クラス化した商品のArrayを返す
-    return classifiedProducts;
-}
 
 /**
  * 金額を3桁区切りにする関数

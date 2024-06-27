@@ -117,6 +117,64 @@ class Plant {
     calculateTotalPrice(quantity = this.quantity) {
         return this.price * quantity;
     }
+
+    
+    /**
+     * 入力されたデータからカードに見立てた商品ごとのDIVを作成するメソッド。
+     */
+    createCard(user = null) {
+        const card = document.createElement('div');
+        card.classList.add('d-grid', 'border-0', 'p-2');
+
+        const anchor = document.createElement('a');
+        anchor.href = 'detail.html?slug=' + this.slug;
+        anchor.style.textDecoration = 'none';
+        anchor.style.color = 'black';
+
+        const cardImg = document.createElement('img');
+        cardImg.classList.add('object-fit-cover', 'w-100', 'rounded');
+        cardImg.style.height = '360px';
+        cardImg.style.objectFit = 'cover';
+        cardImg.src = this.image_url;
+        cardImg.alt = this.name;
+
+        const cardBody = document.createElement('div');
+        cardBody.classList.add('d-flex', 'flex-column', 'align-items-start', 'p-2');
+
+        const cardTitle = document.createElement('h5');
+        cardTitle.textContent = this.japanese_name;
+
+        const cardText = document.createElement('p');
+        cardText.textContent = this.description;
+
+        cardBody.appendChild(cardTitle);
+        cardBody.appendChild(cardText);
+
+        if (user && user.is_logged_in) {
+            const cardButton = document.createElement('button');
+            // ユーザーがいいねをしているかどうかでボタンのテキストを変更する。
+            if (user.liked_products.includes(this.id)) {
+                cardButton.classList.add('btn', 'btn-outline-danger');
+                cardButton.textContent = 'お気に入りから削除';
+            } else {
+                cardButton.classList.add('btn', 'btn-outline-primary');
+                cardButton.textContent = 'お気に入りに追加';
+            }
+            cardButton.onclick = (e) => {
+                // クラス内のtoggleLikeメソッドを使い、いいねの数を増やす。
+                this.toggleLike(e);
+                // ログインしている場合、いいねの情報を更新するメソッドを呼び出す。
+                user.toggleLike(this.id);
+            }
+            cardBody.appendChild(cardButton);
+        }
+
+        anchor.appendChild(cardImg);
+        anchor.appendChild(cardBody);
+        card.appendChild(anchor);
+
+        return card;
+    }
 }
 
 export default Plant;

@@ -49,7 +49,9 @@
 2. `handleMypageFormSubmit`関数でフォームがサブミットされた場合の処理を行う。関数内で`updateUserDataOnLocalStorage`を呼出し、フォームに入力された内容でローカルストレージのユーザ情報をアップデートするようにする。また、`new FormData()`コンストラクタを使用してform内の各nameとvalueの情報をkey-valueペアの形で取得できるようにしている。
 
 ## お気に入り画面(favorites.html)
-1. ベースは`商品一覧画面(lists.html)`と一緒の仕様だが、ログインユーザデータを取得し、そのユーザデータの`liked_products`を基準にplantsデータをFilterする点が異なる。
+1. ベースは`商品一覧画面(lists.html)`と一緒の仕様。まず、ログインユーザデータを取得し、そのユーザデータの`liked_products`を取得する。
+2. 1のデータを基準にplantsデータをフィルタし取得したデータのみで、Plantクラスのメソッドを使いカードを表示させる。
+3. もしもお気に入りデータが取得できない場合は、その旨を示すメッセージを表示させる。
 
 ## ヘッダー画面(各html, header.js)
 1. `headerDisplay`関数を使って、logged-inかnot-logged-inクラスを持つエレメントの表示を調整する。
