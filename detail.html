@@ -83,68 +83,73 @@
     </nav>
 
 
-    <div>
-        <h1>商品詳細</h1>
-        <div class="container-sm text-center">
-            <div class="row">
-                <div class="col">
-                    <img id="product-image" src="" alt="product-image" class="rounded img-fluid">
-                </div>
-                <div class="col d-flex flex-column align-items-center justify-content-center">
-                    <div class="d-flex flex-row justify-content-center align-items-center gap-3">
+    <main class="container text-center p-3">
+        <div class="col">
+            <h2>
+                商品詳細
+            </h2>
+            <div class="container-sm text-center">
+                <div class="row">
+                    <div class="col">
+                        <img id="product-image" src="" alt="product-image" class="rounded img-fluid">
+                    </div>
+                    <div class="col d-flex flex-column align-items-center justify-content-center">
+                        <div class="d-flex flex-row justify-content-center align-items-center gap-3">
+                            <div>
+                                <span id="product-name"></span>
+                            </div>
+                            <div id="product-liked-div" class="d-flex align-items-center justify-content-center">
+                                <icon id="liked-icon" aria-hidden="true"></icon> <!-- お気に入りアイコン -->
+                            </div>
+                        </div>
                         <div>
-                            <span id="product-name"></span>
+                            説明: <span id="product-description"></span>
                         </div>
-                        <div id="product-liked-div" class="d-flex align-items-center justify-content-center">
-                            <icon id="liked-icon" aria-hidden="true"></icon> <!-- お気に入りアイコン -->
+                        <div>
+                            商品コード: <span id="product-code"></span>
                         </div>
-                    </div>
-                    <div>
-                        説明: <span id="product-description"></span>
-                    </div>
-                    <div>
-                        商品コード: <span id="product-code"></span>
-                    </div>
-                    <div>
-                        <div class="form-control-lg">
-                            <button id="twitter-share-button" class="btn sns-share-link-button">
-                                <a>
-                                    <i class="fab fa-x-twitter"></i>
-                                </a>
-                            </button>
-                            <button id="facebook-share-button" class="btn sns-share-link-button">
-                                <a>
-                                    <i class="fab fa-facebook"></i>
-                                </a>
-                            </button>
-                            <button id="line-share-button" class="btn sns-share-link-button">
-                                <a>
-                                    <i class="fab fa-line"></i>
-                                </a>
-                            </button>
+                        <div>
+                            <div class="form-control-lg">
+                                <button id="twitter-share-button" class="btn sns-share-link-button">
+                                    <a>
+                                        <i class="fab fa-x-twitter"></i>
+                                    </a>
+                                </button>
+                                <button id="facebook-share-button" class="btn sns-share-link-button">
+                                    <a>
+                                        <i class="fab fa-facebook"></i>
+                                    </a>
+                                </button>
+                                <button id="line-share-button" class="btn sns-share-link-button">
+                                    <a>
+                                        <i class="fab fa-line"></i>
+                                    </a>
+                                </button>
+                            </div>
                         </div>
+                        <div id="product-price-and-quantity"
+                            class="d-flex flex-column justify-content-center align-items-center">
+                            <p>
+                                1個当たり販売価格:&nbsp;<span id="product-price"></span>円
+                            </p>
+                            <p>
+                                <labal for="product-quantity">数量:&nbsp;
+                                    <input id="product-quantity" type="number" name="product-quantity"
+                                        class="form-control" min="0" />
+                                </labal>
+                            </p>
+                        </div>
+                        <div id="total-price-div">
+                            <p>
+                                合計金額: <span id="total-price"></span>円
+                            </p>
+                        </div>
+                        <button id="cart-button" class="btn btn-outline-success">カートに入れる</button>
                     </div>
-                    <div id="product-price-and-quantity"
-                        class="d-flex flex-column justify-content-center align-items-center">
-                        <p>
-                            1個当たり販売価格:&nbsp;<span id="product-price"></span>円
-                        </p>
-                        <p>
-                            <labal for="product-quantity">数量:&nbsp;
-                                <input id="product-quantity" type="number" name="product-quantity" class="form-control" min="0" />
-                            </labal>
-                        </p>
-                    </div>
-                    <div id="total-price-div">
-                        <p>
-                            合計金額: <span id="total-price"></span>円
-                        </p>
-                    </div>
-                    <button id="cart-button" class="btn btn-outline-success">カートに入れる</button>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
 
     <script src="./static/js/detail.js" type="module"></script>

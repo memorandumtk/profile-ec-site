@@ -165,6 +165,8 @@ class Plant {
                 this.toggleLike(e);
                 // ログインしている場合、いいねの情報を更新するメソッドを呼び出す。
                 user.toggleLike(this.id);
+                // いいね押下を反映させるためにページをリロードする。
+                window.location.reload();
             }
             cardBody.appendChild(cardButton);
         }
