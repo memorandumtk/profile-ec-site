@@ -6,6 +6,7 @@ const elementsForNotLoggedIn = document.querySelectorAll('.not-logged-in');
 
 const logoutAnchor = document.querySelector('#logout');
 const dropdownOfUser = document.querySelector('.user-email-dropdown');
+const dropdownOfLiElement = document.querySelector('#user-email-dropdown-li');
 
 /**
  * ユーザがログインしているかによって、ヘッダーの表示を変える関数
@@ -18,6 +19,11 @@ const headerDisplay = (user) => {
         elementsForNotLoggedIn.forEach(element => {
             element.classList.add('d-none');
         });
+        dropdownOfLiElement.classList.remove('d-none');
+
+        // ドロップダウンにユーザのメールアドレスを表示する。
+        dropdownOfUser.textContent = user.email;
+
     } else {
         elementsForLoggedIn.forEach(element => {
             element.classList.add('d-none');
@@ -25,6 +31,7 @@ const headerDisplay = (user) => {
         elementsForNotLoggedIn.forEach(element => {
             element.classList.remove('d-none');
         });
+        dropdownOfLiElement.classList.add('d-none');
     }
 }
 
@@ -52,5 +59,4 @@ window.addEventListener('load', () => {
         handleLogout(classfiedUser);
     });
     
-    dropdownOfUser.textContent = loginUserEmail;
 });

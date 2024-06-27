@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,37 +10,109 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="./static/css/common.css">
 </head>
+
 <body>
-    <form id="mypage-form">
-        <div>
-            <label for="last-name">名前（性）</label>
-            <input type="text" id="last-name" name="last-name" required>
+    <!-- ナビゲーションバー Bootstrap 5 Quick Snippetsで生成-->
+    <nav id="header-nav-bar" class="navbar navbar-expand-sm">
+        <div class="container-sm align-items-center justify-content-evenly">
+            <a class="navbar-brand" href="/home.html">
+                ECサイト
+            </a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse w-100 flex justify-content-end" id="collapsibleNavId">
+                <ul class="navbar-nav mt-2 mt-lg-0 justify-content-center align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/lists.html">商品一覧</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/inquiry.html">お問い合わせ</a>
+                    </li>
+                    <!-- ここからログインしているかどうかでリンク表示を分けるために「logged-in」と「not-logged-in」のクラスを追加 -->
+                    <li class="nav-item logged-in">
+                        <a class="nav-link" href="favorites.html">お気に入り</a>
+                    </li>
+                    <li class="nav-item logged-in">
+                        <a class="nav-link" href="/cart.html">カート</a>
+                    </li>
+                    <li class="nav-item logged-in">
+                        <a class="nav-link active" href="/mypage.html" aria-current="page">
+                            マイページ
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item not-logged-in">
+                        <a class="nav-link" href="/register.html">ユーザ登録</a>
+                    </li>
+                    <li class="nav-item not-logged-in">
+                        <a class="nav-link" href="/login.html">ログイン</a>
+                    </li>
+                    <li class="nav-item logged-in">
+                        <a id="logout" class="nav-link" href="/login.html">ログアウト</a>
+                    </li>
+                    <li id="user-email-dropdown-li" class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle user-email-dropdown" href="#" id="dropdownId"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <!-- ユーザのEmailが入る -->
+                        </a>
+                        <!-- ここは、ユーザ関連のリンクにしてもいいかも -->
+                        <ul class="dropdown-menu" aria-labelledby="dropdownId">
+                            <li>
+                                <a class="dropdown-item" href="/mypage.html">マイページ</a>
+                            </li>
+                            <li>
+                                <a id="logout-in-dropdown" class="dropdown-item" href="/login.html">ログアウト</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div>
-            <label for="first-name">名前（名）</label>
-            <input type="text" id="first-name" name="first-name" required>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <form id="mypage-form">
+                <div>
+                    <label for="last-name">名前（性）</label>
+                    <input type="text" id="last-name" name="last-name" required>
+                </div>
+                <div>
+                    <label for="first-name">名前（名）</label>
+                    <input type="text" id="first-name" name="first-name" required>
+                </div>
+                <div>
+                    <label for="phone">電話番号</label>
+                    <input type="text" id="phone" name="phone" required>
+                </div>
+                <div>
+                    <label for="address">住所</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="card-info">カード情報</label>
+                    <input type="text" id="card-info" name="card-info">
+                </div>
+                <div>
+                    <button type="submit">Save</button>
+                </div>
+            </form>
         </div>
-        <div>
-            <label for="phone">電話番号</label>
-            <input type="text" id="phone" name="phone" required>
-        </div>
-        <div>
-            <label for="address">住所</label>
-            <input type="text" id="address" name="address" required>
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-            <label for="card-info">カード情報</label>
-            <input type="text" id="card-info" name="card-info">
-        </div>
-        <div>
-            <button type="submit">Save</button>
-        </div>
-    </form>
+    </div>
+
 
     <script src="./static/js/mypage.js" type="module"></script>
+    <script src="./static/js/header.js" type="module"></script>
 </body>
+
 </html>
