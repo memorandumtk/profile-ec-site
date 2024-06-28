@@ -1,3 +1,11 @@
+:root { /* Prient theme */
+  --main: #67A7CC;
+  --primary: #ACC9DE;
+  --secondary: #E1EDF5;
+  --near-white: #F5F8FA;
+  --main-white: #FFFFFF;
+  --main-black: #000000;
+}
 
 #product-image {
     width: 100%;
@@ -21,7 +29,7 @@
 
 .sns-share-link-button a {
     font-size: 24px;
-    color: black;
+    color: var(--main-black);
 }
 
 #product-price {
