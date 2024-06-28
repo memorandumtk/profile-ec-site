@@ -124,7 +124,9 @@ class Plant {
      */
     createCard(user = null) {
         const card = document.createElement('div');
-        card.classList.add('d-grid', 'border-0', 'p-2');
+        card.classList.add('d-grid', 'border-0', 'p-2', 'rounded', 'shadow', );
+        // カードの背景色を透明がかった白に設定する。
+        card.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
 
         const anchor = document.createElement('a');
         anchor.href = 'detail.html?slug=' + this.slug;
