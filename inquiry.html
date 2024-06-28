@@ -79,34 +79,43 @@
     </nav>
 
 
-    <main class="container text-center p-3">
-        <div class="col">
-            <h2>
-                お問い合わせ
-            </h2>
+    <main class="container-sm text-center p-3">
+        <div class=" d-flex flex-column justify-content-center align-items-center">
+            <div>
+                <h2>
+                    お問い合わせ
+                </h2>
+            </div>
 
-            <form id="inquiry-form">
-
-                <div>
-                    <label for="inquiry-name">お名前</label>
-                    <input type="text" id="inquiry-name" name="inquiry-name" placeholder="お名前" />
+            <!-- p-12は幅を100%に設定する。 -->
+            <form id="inquiry-form" class="col-12">
+                <div class="mb-3 row">
+                    <label for="inquiry-name" class="col-form-label">お名前</label>
+                    <div class="col">
+                        <input type="text" id="inquiry-name" name="inquiry-name" class="form-control"
+                            placeholder="お名前" />
+                    </div>
                 </div>
 
-                <div>
-                    <label for="inquiry-email">メールアドレス</label>
-                    <input type="email" id="inquiry-email" name="inquiry-email" placeholder="メールアドレス" />
+                <div class="mb-3 row">
+                    <label for="inquiry-email" class="col-form-label">メールアドレス</label>
+                    <div class="col">
+                        <input type="email" id="inquiry-email" name="inquiry-email" class="form-control"
+                            placeholder="メールアドレス" />
+                    </div>
                 </div>
 
-                <div>
-                    <label for="inquiry-text">お問い合わせ内容</label>
-                    <textarea id="inquiry-text" name="inquiry-text" placeholder="お問い合わせ内容"></textarea>
+                <div class="mb-3 row">
+                    <label for="inquiry-text" class="col-form-label">お問い合わせ内容</label>
+                    <div class="col">
+                        <textarea id="inquiry-text" name="inquiry-text" class="form-control" placeholder="お問い合わせ内容を入力してください。  "
+                            rows="10"></textarea>
+                    </div>
                 </div>
 
-
-                <button type="submit">送信</button>
+                <button type="submit" class="btn btn-outline-secondary w-100 mt-3 p-3">送信</button>
             </form>
         </div>
-
     </main>
 
 

@@ -33,3 +33,15 @@ html {
 #header-nav-bar li a:hover {
   background-color: var(--secondary);
 }
+
+/* 基本的なFormデザイン */
+.basic-form {
+  width: 500px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 600px) {
+  .basic-form {
+    width: 100%;
+  }
+}
