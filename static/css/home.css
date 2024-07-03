@@ -7,12 +7,12 @@
   --main-black: #000000;
 }
 
+/* メイン画像の設定。参考：https://www.w3schools.com/howto/howto_css_blurred_background.asp */
 #main-image-div {
-  height: 600px;
+  height: 640px;
   object-fit: cover;
 }
 
-/* 参考：https://www.w3schools.com/howto/howto_css_blurred_background.asp */
 #home-main-image {
   /* Add the blur effect */
   filter: blur(2px);
@@ -48,6 +48,13 @@
   justify-content: center;
 }
 
+/* カルーセルの設定 */
+#carouselId {
+  background-color: var(--main-white);
+  border: 0;
+  border-radius: 16px;
+}
+
 /* 高さを調節しないと大きい画像の場合、不自然な表示になるので、高さを調節する。 */
 .carousel-item {
   width: 100%;
@@ -56,4 +63,21 @@
 
 .carousel-item img {
   z-index: -100;
+  border: 0;
+  border-radius: 16px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* 購入履歴に関する設定 */
+.purchase-data * {
+  background-color: var(--primary);
+  color: var(--main-white);
+}
+
+.purchase-data {
+  background-color: var(--primary);
+  color: var(--main-white);
+  box-shadow: 4px 4px 10px var(--main);
 }
