@@ -124,9 +124,9 @@ class Plant {
      */
     createCard(user = null) {
         const card = document.createElement('div');
-        card.classList.add('d-grid', 'border-0', 'p-2', 'rounded', 'shadow', );
-        // カードの背景色を透明がかった白に設定する。
-        card.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+        card.classList.add('d-grid', 'border-0', 'rounded', 'shadow', 'plant-card-div');
+        // // カードの背景色を透明がかった白に設定する。
+        // card.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
 
         const anchor = document.createElement('a');
         anchor.href = 'detail.html?slug=' + this.slug;
@@ -141,7 +141,7 @@ class Plant {
         cardImg.alt = this.name;
 
         const cardBody = document.createElement('div');
-        cardBody.classList.add('d-flex', 'flex-column', 'align-items-start', 'p-2');
+        cardBody.classList.add('d-flex', 'flex-column', 'align-items-start', 'p-3');
 
         const cardTitle = document.createElement('h5');
         cardTitle.textContent = this.japanese_name;

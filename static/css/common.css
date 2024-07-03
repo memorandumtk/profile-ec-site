@@ -1,10 +1,25 @@
-:root { /* Prient theme */
-  --main: #67A7CC;
-  --primary: #ACC9DE;
-  --secondary: #E1EDF5;
-  --near-white: #F5F8FA;
-  --main-white: #FFFFFF;
+:root {
+  /* Prient theme */
+  --main: #67a7cc;
+  --primary: #acc9de;
+  --secondary: #e1edf5;
+  --near-white: #f5f8fa;
+  --main-white: #ffffff;
   --main-black: #000000;
+  --background: linear-gradient(
+    90deg,
+    var(--main-white) 0%,
+    var(--near-white) 80%,
+    var(--secondary) 100%
+  );
+  --background-dark: linear-gradient(
+    90deg,
+    var(--main) 0%,
+    var(--primary) 60%,
+    var(--secondary) 100%
+  );
+  --card-color: var(--secondary);
+  --card-color-dark: rgba(255, 255, 255, 0.8); 
 }
 
 body,
@@ -13,7 +28,8 @@ html {
   width: 100%;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: var(--secondary);
+  background: var(--background);
+  color: var(--main-black);
 }
 
 * {
@@ -46,6 +62,11 @@ html {
   }
 }
 
+/* カードを表示するためのデザイン */
+.plant-card-div {
+  background-color: var(--card-color);
+}
+
 /* フッター */
 .footer {
   background-color: var(--near-white);
@@ -56,6 +77,19 @@ html {
 }
 
 .footer-icons a {
-    font-size: 24px;
-    color: var(--main-black);
+  font-size: 24px;
+  color: var(--main-black);
+}
+
+/* ここからダークテーマ用設定 */
+@media (prefers-color-scheme: dark) {
+  body,
+  html {
+    background: var(--background-dark);
+    color: var(--main-white);
+  }
+
+  .plant-card-div {
+    background: var(--card-color-dark);
+  }
 }
