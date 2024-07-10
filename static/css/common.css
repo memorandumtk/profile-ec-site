@@ -37,6 +37,11 @@ html {
 }
 
 /* nav bar ヘッダー*/
+.navbar-brand {
+  font-size: 28px;
+  font-weight: 500;
+}
+
 #header-nav-bar {
   background-color: var(--near-white);
   height: 80px;

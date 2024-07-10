@@ -9,7 +9,7 @@
 
 /* メイン画像の設定。参考：https://www.w3schools.com/howto/howto_css_blurred_background.asp */
 #main-image-div {
-  height: 640px;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -35,8 +35,8 @@
   font-weight: bold;
   border: 3px solid #f1f1f1;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 25%; /* 上から1/4の位置 */
+  left: 50%; /* 左から中央の位置 */
   transform: translate(-50%, -50%);
   z-index: 2;
   width: 80%;
