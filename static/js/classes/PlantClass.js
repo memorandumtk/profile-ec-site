@@ -124,7 +124,7 @@ class Plant {
      */
     createCard(user = null) {
         const card = document.createElement('div');
-        card.classList.add('d-grid', 'border-0', 'rounded', 'shadow', 'plant-card-div');
+        card.classList.add('d-grid', 'border-0', 'rounded', 'card', 'plant-card-div');
         // // カードの背景色を透明がかった白に設定する。
         // card.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
 

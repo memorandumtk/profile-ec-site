@@ -6,18 +6,19 @@
   --near-white: #f5f8fa;
   --main-white: #ffffff;
   --main-black: #000000;
+  --main-green: #0C6124;
+  --dark-green: #073E17;
+  --dark-green2: rgba(4, 44, 16);
   --background: linear-gradient(
-    90deg,
-    var(--main-white) 0%,
-    var(--near-white) 80%,
-    var(--secondary) 100%
-  );
-  --background-dark: linear-gradient(
     90deg,
     var(--main) 0%,
     var(--primary) 60%,
     var(--secondary) 100%
+    /* var(--main-white) 0%,
+    var(--near-white) 80%,
+    var(--secondary) 100% */
   );
+  --background-dark: var(--dark-green2);
   --card-color: var(--secondary);
   --card-color-dark: rgba(255, 255, 255, 0.8); 
 }
@@ -52,7 +53,7 @@ html {
 }
 
 #header-nav-bar li a:hover {
-  background-color: var(--secondary);
+  color: var(--primary);
 }
 
 /* 基本的なFormデザイン */
@@ -70,6 +71,12 @@ html {
 /* カードを表示するためのデザイン */
 .plant-card-div {
   background-color: var(--card-color);
+  box-shadow: 0 4px 8px 0 rgba(255,255,255,0.6);
+  transition: 0.3s;
+}
+
+.plant-card-div:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 /* フッター */
@@ -92,6 +99,25 @@ html {
   html {
     background: var(--background-dark);
     color: var(--main-white);
+    min-height: 100%;
+  }
+
+  #header-nav-bar {
+    background-color: var(--dark-green);
+    color: var(--main-white);
+  }
+
+  #header-nav-bar .navbar-brand {
+    color: var(--main-white);
+  }
+
+  #header-nav-bar .nav-link {
+    color: var(--main-white);
+  }
+
+  #cards-container {
+    min-height: 100%;
+    min-width: 100%;
   }
 
   .plant-card-div {

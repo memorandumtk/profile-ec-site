@@ -5,7 +5,6 @@
  */
 export const checkDarkMode = () => {
 
-
   const mediaQueryObj = window.matchMedia('(prefers-color-scheme: dark)');
   const isDarkMode = mediaQueryObj.matches;
 
