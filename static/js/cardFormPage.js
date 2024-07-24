@@ -60,7 +60,7 @@ const handleMypageFormSubmit = (event, user) => {
         if (cardInfo.holder_name.length < 1) {
             throw new Error('カード名義を入力してください。');
         }
-        user.card_infomation = cardInfo;
+        user.card_information = cardInfo;
         user.payment_method = 'card';
         updateUserDataOnLocalStorage(user);
         alert('クレジットカード情報を更新しました。');

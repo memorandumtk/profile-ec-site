@@ -55,7 +55,7 @@ const handleMypageFormSubmit = (event, user) => {
     user.payment_method = formData.get('payment-method');
     // cash(現金払い)が選択された時は、クレジットカードのCVV情報を削除する。
     if (user.payment_method === 'cash') {
-        user.card_infomaion = {};
+        user.card_information = {};
     }
     updateUserDataOnLocalStorage(user);
     alert('マイページ情報を更新しました。');

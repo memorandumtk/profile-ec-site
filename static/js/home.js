@@ -125,7 +125,8 @@ function generatePurchaseDateHTML(items, index) {
         const date = Object.keys(items);
         date.forEach(date => {
             items[date].forEach(itemData => {
-                const classifiedPlant = createPlantClassByKey(itemData.product_name, 'name');
+                console.log('this is itemData: ', itemData);
+                const classifiedPlant = createPlantClassByKey(itemData.name, 'name');
                 console.log('this is classifiedPlant: ', classifiedPlant);
                 itemsHTML += generatePurchaseItemHTML(classifiedPlant, itemData);
                 allOfTotalPrice += classifiedPlant.calculateTotalPrice();

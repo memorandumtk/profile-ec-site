@@ -5,10 +5,12 @@ import User from './classes/UserClass.js';
 import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
 import { getFormattedDate } from './utils/getFormattedDate.js';
 import { createClassifiedProduct, createClassifiedProducts } from './utils/createClassifiedProducts.js';
+import { displayPurchaseModal } from './utils/displayPurchaseModal.js';
 
 const cartProduct = document.querySelector('#cart-products');
 const cartSummaryDiv = document.querySelector('#cart-summary');
 const totalPriceSpan = document.querySelector('#total-price');
+const purchaseButton = document.querySelector('#purchase-button');
 
 /**
  * 金額を3桁区切りにする関数
@@ -49,32 +51,6 @@ function handleDeleteProductFromCart(user, product, products) {
 }
 
 /**
- * `puprchase_history`に保存するオブジェクトを作成する関数。
- */
-function createPurchaseObject(products) {
-    const currentDate = new Date().valueOf();
-    const purchaseObject = { [currentDate]: products };
-    return purchaseObject;
-}
-
-/**
- * カートの商品をユーザの`puprchase_history`に商品を追加する関数。
- */
-function addProductsToPurchaseHistory(user, products) {
-
-    const purchaseObject = createPurchaseObject(products);
-    // 分岐を作ったが、一旦処理は同じになっている。
-    if (user.purchase_history.length === 0) {
-        user.purchase_history.push(purchaseObject);
-    } else if (user.purchase_history.length > 0) {
-        user.purchase_history.push(purchaseObject);
-    }
-    console.log(user);
-
-    updateUserDataOnLocalStorage(user);
-}
-
-/**
  * 「購入」ボタンをクリックしたときに実行される関数で、ユーザの`puprchase_history`に商品を追加する。
  */
 function handlePurchase(user, products) {
@@ -87,14 +63,9 @@ function handlePurchase(user, products) {
         purchaseList.push(purchase);
     })
 
-    addProductsToPurchaseHistory(user, purchaseList);
+    // 購入情報確認Modalを表示する
+    displayPurchaseModal(user, purchaseList);
 
-    // カートの中身を空にする
-    user.products_in_cart = [];
-    updateUserDataOnLocalStorage(user);
-
-    // ホーム画面に戻る
-    window.location.href = '/home.html';
 }
 
 /**
@@ -144,7 +115,6 @@ function redisplayCartList(user) {
     displayCartList(user);
     console.log('cart list is redisplayed');
 }
-
 
 /**
  * `products_in_cart`にある商品をカート商品用のDIVに表示する関数
@@ -251,11 +221,10 @@ window.addEventListener('load', () => {
 
     displayCartList(classfiedUser, classifiedProducts);
 
-    const purchaseButton = document.querySelector('#purchase-button');
+    purchaseButton.disabled = classifiedProducts.length === 0;
     purchaseButton.addEventListener('click', (e) => {
         e.preventDefault();
         handlePurchase(classfiedUser, classifiedProducts);
     });
-
 
 });

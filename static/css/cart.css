@@ -1,0 +1,22 @@
+@import "./common.css";
+
+#purchase-modal {
+    position: fixed;;
+    z-index: 1;
+    left: 25%;
+    top: 25%;
+    width: 50%;
+    height: 50%;
+    overflow: auto;
+    background-color: var(--secondary);
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 4px 4px var(--main);
+}
+
+@media (prefers-color-scheme: dark) {
+    #purchase-modal {
+        background-color: var(--near-white);
+        color: var(--main-black);
+    }
+}

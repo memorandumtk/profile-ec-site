@@ -1,41 +1,68 @@
-:root { /* Prient theme */
-  --main: #67A7CC;
-  --primary: #ACC9DE;
-  --secondary: #E1EDF5;
-  --near-white: #F5F8FA;
-  --main-white: #FFFFFF;
+:root {
+  /* Prient theme */
+  --main: #67a7cc;
+  --primary: #acc9de;
+  --secondary: #e1edf5;
+  --near-white: #f5f8fa;
+  --main-white: #ffffff;
   --main-black: #000000;
+  --main-green: #0c6124;
+  --dark-green: #073e17;
+  --dark-green2: rgba(4, 44, 16);
+  --background: linear-gradient(
+    90deg,
+    var(--main) 0%,
+    var(--primary) 60%,
+    var(--secondary) 100%
+      /* var(--main-white) 0%,
+    var(--near-white) 80%,
+    var(--secondary) 100% */
+  );
+  --background-dark: var(--dark-green2);
+  --card-color: var(--secondary);
+  --card-color-dark: rgba(255, 255, 255, 0.8);
 }
 
 #product-image {
-    width: 100%;
-    height: 600px;
-    object-fit: cover;
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
 }
 
 #product-name {
-    font-size: 32px;
-    font-weight: bold;
+  font-size: 32px;
+  font-weight: bold;
 }
 
 #liked-icon {
-    font-size: 20px;
+  font-size: 20px;
+  color: var(--main);
 }
 
-.fa-twitter,
+.fa-x-twitter,
 .fa-facebook,
 .fa-line {
+  color: var(--main-black);
 }
 
 .sns-share-link-button a {
-    font-size: 24px;
-    color: var(--main-black);
+  font-size: 24px;
+  color: var(--main-black);
 }
 
 #product-price {
-    font-size: 32px;
+  font-size: 32px;
 }
 
 #total-price {
-    font-size: 24px;
+  font-size: 24px;
+}
+
+/* ここからダークテーマ用設定 */
+@media (prefers-color-scheme: dark) {
+  .fa-x-twitter,
+  .fa-facebook,
+  .fa-line {
+    color: var(--main);
+  }
 }
