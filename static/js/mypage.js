@@ -7,7 +7,9 @@ const firstNameInput = document.querySelector('#first-name');
 const phoneNumberInput = document.querySelector('#phone');
 const addressInput = document.querySelector('#address');
 const emailInput = document.querySelector('#email');
-const cardInfoInput = document.querySelector('#card-info');
+const paymentMethodCashRadio = document.querySelector('#payment-method-cash');
+const paymentMethodCardRadio = document.querySelector('#payment-method-card');
+const linkToCardForm = document.querySelector('#link-to-card-form');
 const mypageForm = document.querySelector('#mypage-form');
 
 /**
@@ -21,6 +23,19 @@ const formDisplay = (user) => {
         phoneNumberInput.value = user.phone_number;
         addressInput.value = user.address;
         emailInput.value = user.email;
+        paymentMethodCardRadio.addEventListener('change', () => {
+            linkToCardForm.classList.remove('d-none');
+        });
+        paymentMethodCashRadio.addEventListener('change', () => {
+            linkToCardForm.classList.add('d-none');
+        });
+
+        if (user.payment_method === 'card') {
+            paymentMethodCardRadio.checked = true;
+            linkToCardForm.classList.remove('d-none');
+        } else {
+            paymentMethodCashRadio.checked = true;
+        }
     }
 }
 
@@ -37,6 +52,11 @@ const handleMypageFormSubmit = (event, user) => {
     user.phone_number = formData.get('phone');
     user.address = formData.get('address');
     user.email = formData.get('email');
+    user.payment_method = formData.get('payment-method');
+    // cash(現金払い)が選択された時は、クレジットカードのCVV情報を削除する。
+    if (user.payment_method === 'cash') {
+        user.card_infomaion = {};
+    }
     updateUserDataOnLocalStorage(user);
     alert('マイページ情報を更新しました。');
 }

@@ -1,0 +1,49 @@
+:root {
+  /* Prient theme */
+  --main: #67a7cc;
+  --primary: #acc9de;
+  --secondary: #e1edf5;
+  --near-white: #f5f8fa;
+  --main-white: #ffffff;
+  --main-black: #000000;
+  --main-green: #0c6124;
+  --dark-green: #073e17;
+  --dark-green2: rgba(4, 44, 16);
+  --background: linear-gradient(
+    90deg,
+    var(--main) 0%,
+    var(--primary) 60%,
+    var(--secondary) 100%
+      /* var(--main-white) 0%,
+    var(--near-white) 80%,
+    var(--secondary) 100% */
+  );
+  --background-dark: var(--dark-green2);
+  --card-color: var(--secondary);
+  --card-color-dark: rgba(255, 255, 255, 0.8);
+}
+
+#card-cvv-div {
+  position: relative;
+  display: inline-block;
+}
+
+#card-cvv-div #card-cvv {
+  letter-spacing: 3px;
+  color: transparent;
+}
+
+#card-cvv-div #card-cvv-masking-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-color: transparent;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: inherit;
+  color: black;
+  white-space: nowrap;
+}

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>マイページ</title>
+    <title>カード情報入力</title>
 
     <!-- Font Awsomeのアイコンを使うためのリンク 高木アカウント -->
     <script src="https://kit.fontawesome.com/ae8297218d.js" crossorigin="anonymous"></script>
@@ -12,6 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="./static/css/common.css">
+    <link rel="stylesheet" href="./static/css/card-form-page.css">
 </head>
 
 <body>
@@ -83,45 +84,36 @@
         <div class="py-3 gap-3 d-flex flex-column justify-content-center align-content-center">
             <div>
                 <h1>
-                    マイページ
+                    カード情報入力画面
                 </h1>
             </div>
 
-            <form id="mypage-form" class="basic-form d-flex flex-column justify-content-center align-items-center">
+            <div>
+                <p id="card-form-page-massage"></p>
+            </div>
+            <form id="card-form" class="basic-form d-flex flex-column justify-content-center align-items-center">
                 <div class="w-100">
-                    <label for="last-name" class="col-form-label">名前（性）</label>
-                    <input type="text" id="last-name" name="last-name" class="form-control" required placeholder="名前（性）">
+                    <label for="card-name" class="col-form-label">カードネーム</label>
+                    <input type="text" id="card-name" name="card-name" class="form-control">
                 </div>
+
                 <div class="w-100">
-                    <label for="first-name" class="col-form-label">名前（名）</label>
-                    <input type="text" id="first-name" name="first-name" class="form-control" required placeholder="名前（名）">
+                    <label for="card-number" class="col-form-label">カード番号</label>
+                    <input type="text" id="card-number" name="card-number" class="form-control">
                 </div>
+
                 <div class="w-100">
-                    <label for="phone" class="col-form-label">電話番号</label>
-                    <input type="text" id="phone" name="phone" class="form-control" required placeholder="電話番号">
+                    <label for="card-expiration-date" class="col-form-label">カード 有効期限</label>
+                    <input type="month" id="card-expiration-date" name="card-expiration-date" class="form-control">
                 </div>
+
+
                 <div class="w-100">
-                    <label for="address" class="col-form-label">住所</label>
-                    <input type="text" id="address" name="address" class="form-control" required placeholder="住所">
-                </div>
-                <div class="w-100">
-                    <label for="email" class="col-form-label">メールアドレス</label>
-                    <div class="">
-                        <input type="email" id="email" name="email" class="form-control" placeholder="メールアドレス" />
+                    <label for="card-cvv" class="col-form-label">CVV</label>
+                    <div id="card-cvv-div" class="w-100">
+                        <input type="text" id="card-cvv" name="card-cvv" class="form-control" maxlength="3">
+                        <span id="card-cvv-masking-input"></span>
                     </div>
-                </div>
-                <div class="p-3 d-flex flex-column gap-3">
-                    <div class="form-check">
-                        <input type="radio" id="payment-method-cash" name="payment-method" value="cash" class="form-check-input">
-                        <label for="payment-method-cash"  class="form-check-label">現金支払い</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="radio" id="payment-method-card" name="payment-method" value="card" class="form-check-input">
-                        <label for="payment-method-card"  class="form-check-label">カード支払い</label>
-                    </div>
-                    <a id="link-to-card-form" href="/card-form-page.html" class="d-none">
-                        カード情報入力画面へ
-                    </a>
                 </div>
 
                 <button type="submit" class="btn btn-outline-secondary w-100 py-3 mt-3">変更を保存</button>
@@ -178,7 +170,7 @@
         </nav>
     </footer>
 
-    <script src="./static/js/mypage.js" type="module"></script>
+    <script src="./static/js/cardFormPage.js" type="module"></script>
     <script src="./static/js/header.js" type="module"></script>
 </body>
 

@@ -37,6 +37,7 @@ function displayPlantsOnCarousel(plants) {
             const plant = plants[index];
             const img = item.querySelector('img');
             img.src = plant.image_url;
+            img.classList.add('rounded-full', 'img-in-carousel');
 
             const anchor = item.querySelector('a');
             if (anchor) {
@@ -116,31 +117,39 @@ function generatePurchaseItemHTML(classfiedPlant, item) {
  * @returns 
  */
 function generatePurchaseDateHTML(items, index) {
-    let itemsHTML = '';
-    let allOfTotalPrice = 0;
-    // kyesメソッドを使って、dateのキーデータを取得する。dateキーは1つしかないがArrayになる。例：["1719375844616"]
-    const date = Object.keys(items);
-    date.forEach(date => {
-        items[date].forEach(itemData => {
-            const classifiedPlant = createPlantClassByKey(itemData.name, 'name');
-            itemsHTML += generatePurchaseItemHTML(classifiedPlant, itemData);
-            allOfTotalPrice += classifiedPlant.calculateTotalPrice();
-        })
-    });
-    // 「01. 2024-04-10」のように表示するように。
-    const dateForDisplay = getFormattedDate(date[0], 1);
     const indexForDisplay = String(index + 1).padStart(2, '0');
+    try {
+        let itemsHTML = '';
+        let allOfTotalPrice = 0;
+        // kyesメソッドを使って、dateのキーデータを取得する。dateキーは1つしかないがArrayになる。例：["1719375844616"]
+        const date = Object.keys(items);
+        date.forEach(date => {
+            items[date].forEach(itemData => {
+                const classifiedPlant = createPlantClassByKey(itemData.product_name, 'name');
+                console.log('this is classifiedPlant: ', classifiedPlant);
+                itemsHTML += generatePurchaseItemHTML(classifiedPlant, itemData);
+                allOfTotalPrice += classifiedPlant.calculateTotalPrice();
+            })
+        });
+        // 「01. 2024-04-10」のように表示するように。
+        const dateForDisplay = getFormattedDate(date[0], 1);
 
-    return `
-        <div class="purchase-data card ">
-            <h3 class="card-header bg-transparent">${indexForDisplay + '. ' + dateForDisplay + ' - ' + addCommaToPrice(allOfTotalPrice) + '円'}</h3>
-            <div class="card-body">
-                <div class="list-group list-group-flush">
-                    ${itemsHTML}
+        return `
+            <div class="purchase-data card ">
+                <h3 class="card-header bg-transparent">${indexForDisplay + '. ' + dateForDisplay + ' - ' + addCommaToPrice(allOfTotalPrice) + '円'}</h3>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        ${itemsHTML}
+                    </div>
                 </div>
             </div>
-        </div>
-    `;
+        `;
+    } catch (error) {
+        console.error(error);
+        // 商品名が変更されている場合に起こるエラーをコンソールログに表示する。
+        console.log(indexForDisplay + '番目の購入データにエラーが発生しました。');
+        return null;
+    }
 }
 
 /**
@@ -178,8 +187,12 @@ function displayPurchaseHistory(user) {
 
         // 購入履歴を3件まで表示するように。
         if (index > 2) return;
-        purchaseHistoryHTML += generatePurchaseDateHTML(data, index);
-        numberOfProcessedData++;
+        if (generatePurchaseDateHTML(data, index) === null) {
+            purchaseHistoryHTML += '';
+        } else {
+            purchaseHistoryHTML += generatePurchaseDateHTML(data, index);
+            numberOfProcessedData++;
+        }
     });
 
     if (numberOfProcessedData > 0) {

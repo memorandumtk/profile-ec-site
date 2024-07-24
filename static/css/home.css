@@ -50,8 +50,7 @@
 
 /* カルーセルの設定 */
 #carouselId {
-  /* background-color: var(--main-white); */
-  border-radius: 16px;
+  /* border-radius: 16px; */
 }
 
 /* 高さを調節しないと大きい画像の場合、不自然な表示になるので、高さを調節する。 */
@@ -60,8 +59,9 @@
   height: 600px;
 }
 
-.carousel-item img {
-  z-index: -100;
+/* カルーセルが切り替わるときにborder-radiusの効果が切れてしまう事に気付いたため、新しく.img-in-carouselクラスを追加して対応しようとしたがうまくいかず。 */
+.carousel-inner img,
+.img-in-carousel {
   border: 0;
   border-radius: 16px;
   height: 100%;

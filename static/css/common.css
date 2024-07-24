@@ -6,21 +6,21 @@
   --near-white: #f5f8fa;
   --main-white: #ffffff;
   --main-black: #000000;
-  --main-green: #0C6124;
-  --dark-green: #073E17;
+  --main-green: #0c6124;
+  --dark-green: #073e17;
   --dark-green2: rgba(4, 44, 16);
   --background: linear-gradient(
     90deg,
     var(--main) 0%,
     var(--primary) 60%,
     var(--secondary) 100%
-    /* var(--main-white) 0%,
+      /* var(--main-white) 0%,
     var(--near-white) 80%,
     var(--secondary) 100% */
   );
   --background-dark: var(--dark-green2);
   --card-color: var(--secondary);
-  --card-color-dark: rgba(255, 255, 255, 0.8); 
+  --card-color-dark: rgba(255, 255, 255, 0.8);
 }
 
 body,
@@ -68,15 +68,20 @@ html {
   }
 }
 
+/* マイページ画面のリンクデザイン */
+#link-to-card-form {
+  color: var(--main);
+}
+
 /* カードを表示するためのデザイン */
 .plant-card-div {
   background-color: var(--card-color);
-  box-shadow: 0 4px 8px 0 rgba(255,255,255,0.6);
+  box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.6);
   transition: 0.3s;
 }
 
 .plant-card-div:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* フッター */
@@ -122,5 +127,9 @@ html {
 
   .plant-card-div {
     background: var(--card-color-dark);
+  }
+
+  #link-to-card-form {
+    color: var(--main-white);
   }
 }

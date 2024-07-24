@@ -47,14 +47,6 @@
       51662,
       77116
     ],
-    "purchase_method": [
-      {
-        "type": "credit_card",
-        "card_number": "1234567890123456",
-        "card_expiration_date": "12/23",
-        "card_cvv": "123"
-      }
-    ],
     "products_in_cart": [
       {
         "id": 1,
@@ -76,6 +68,13 @@
         "inquiry_content": "test-inquiry",
         "status": "draft"
       }
-    ]
+    ],
+    "payment_method": "card",
+    "card_infomation": {
+      "holder_name": "test's test",
+      "card_number": "1234567890123456",
+      "expiration_date": "2030-12",
+      "cvv": "123"
+    }
   }
 ]
