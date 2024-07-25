@@ -126,7 +126,7 @@ function generatePurchaseDateHTML(items, index) {
         date.forEach(date => {
             items[date].forEach(itemData => {
                 console.log('this is itemData: ', itemData);
-                const classifiedPlant = createPlantClassByKey(itemData.name, 'name');
+                const classifiedPlant = createPlantClassByKey(itemData.id, 'id');
                 console.log('this is classifiedPlant: ', classifiedPlant);
                 itemsHTML += generatePurchaseItemHTML(classifiedPlant, itemData);
                 allOfTotalPrice += classifiedPlant.calculateTotalPrice();
@@ -217,8 +217,8 @@ window.onload = async () => {
 
     console.log(classfiedUser)
 
-    // ユーザがログインしていれば購入履歴を表示する関数を呼び出す。
-    if (classfiedUser && classfiedUser.is_logged_in) {
+    // ユーザがログインしている且つ、購入履歴がある場合に購入履歴を表示する関数を呼び出す。
+    if (classfiedUser && classfiedUser.is_logged_in && classfiedUser.purchase_history) {
         displayPurchaseHistory(classfiedUser);
     }
 

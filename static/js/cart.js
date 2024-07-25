@@ -6,6 +6,7 @@ import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStora
 import { getFormattedDate } from './utils/getFormattedDate.js';
 import { createClassifiedProduct, createClassifiedProducts } from './utils/createClassifiedProducts.js';
 import { displayPurchaseModal } from './utils/displayPurchaseModal.js';
+import { createPlantClassByKey } from './utils/createPlantClassByKey.js';
 
 const cartProduct = document.querySelector('#cart-products');
 const cartSummaryDiv = document.querySelector('#cart-summary');
@@ -215,7 +216,13 @@ window.addEventListener('load', () => {
     console.log(classfiedUser)
 
     let products = classfiedUser.products_in_cart || [];
-    const classifiedProducts = createClassifiedProducts(products);
+    const classifiedProducts = [];
+    products.map((product, index) => {
+        // idを使い1つずつ商品をクラス化し、数量を追加する。数量は`products_in_cart`にある情報を使う。
+        const classifiedProduct = createPlantClassByKey(product.id, 'id');
+        classifiedProduct.quantity = product.quantity;
+        classifiedProducts.push(classifiedProduct);
+    });
 
     displayCartProducts(classfiedUser, classifiedProducts);
 

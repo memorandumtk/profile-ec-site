@@ -55,7 +55,7 @@
     ],
     "inquiry_history": [
       {
-        "inquiry_content": "test-inquiry",
+        "inquiry_text": "test-inquiry",
         "status": "draft"
       }
     ],

@@ -8,6 +8,9 @@ function addProductsToPurchaseHistory(user, products) {
 
     const currentDate = new Date().valueOf();
     const purchaseObject = { [currentDate]: products };
+    if (!user.purchase_history) {
+        user.purchase_history = [];
+    }
     user.purchase_history.push(purchaseObject);
     console.log(user);
 

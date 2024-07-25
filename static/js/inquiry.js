@@ -2,9 +2,9 @@ import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
 import { checkDarkMode } from './utils/checkDarkMode.js';
 
-const inquiryName = document.querySelector('#inquiry-name');
-const inquiryEmail = document.querySelector('#inquiry-email');
-const inquiryText = document.querySelector('#inquiry-text');
+const inquiryName = document.querySelector('#inquiry_name');
+const inquiryEmail = document.querySelector('#inquiry_email');
+const inquiryText = document.querySelector('#inquiry_text');
 const inquiryForm = document.querySelector('#inquiry-form');
 const inquiryButton = document.querySelector('#inquiry-button');
 
@@ -18,22 +18,39 @@ const formDisplay = (user) => {
         inquiryName.value = fullName;
         inquiryEmail.value = user.email;
         
-        const inquiry_history = user.inquiry_history;
-        if (inquiry_history[inquiry_history.length - 1].status === "draft") {
-            inquiryText.value = inquiry_history[inquiry_history.length - 1].inquiry_content;
+        const inquiryHistory = user.inquiry_history;
+        if (inquiryHistory && inquiryHistory[inquiryHistory.length - 1].status === "draft") {
+            inquiryText.value = inquiryHistory[inquiryHistory.length - 1].inquiry_content;
         }
     }
 }
 
 /**
  * お問い合わせフォームが送信されたときに実行される関数
- * ***現在は、お問い合わせ内容が空でも送信されるようになっている。***
  */
 const handleInquiryFormSubmit = (event, user) => {
+
+    // ユーザがログインしていない場合は、フォームの内容を保存できないため、お問い合わせを受け付けたイメージで、アラートを表示する
+    if (!user) {
+        alert('お問い合わせを受け付けました。');
+        return;
+    }
+
+    // FormDataにinquiryFormを引数として指定することで、フォームの内容を格納する
     let formData = new FormData(inquiryForm);
+    // お問い合わせ内容が空の場合は送信しない
+    if (formData.get('inquiry_text') === '') {
+        alert('お問い合わせ内容を入力してください。');
+        return;
+    
+    }
+    // お問い合わせ内容を送信した場合、statusを'sent'に変更する
     formData.append('status', 'sent');
     for (let entry of formData) {
         console.log(entry);
+    }
+    if (!user.inquiry_history) {
+        user.inquiry_history = [];
     }
     user.inquiry_history.push(Object.fromEntries(formData));
     updateUserDataOnLocalStorage(user);
@@ -42,9 +59,12 @@ const handleInquiryFormSubmit = (event, user) => {
     alert('お問い合わせを受け付けました。');
 }
 
+/**
+ * お問い合わせボタンの色を調整する関数
+ */
 const adjustButtonColor = () => {
     if (checkDarkMode()) {
-        inquiryButton.classList.add('btn-outline-dark');
+        inquiryButton.classList.add('btn-outline-light');
     } else {
         inquiryButton.classList.add('btn-outline-secondary');
     }
