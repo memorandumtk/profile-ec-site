@@ -12,55 +12,45 @@
       {
         "1719274052216":[
           {
-            "name": "Evergreen oak",
-            "quantity": 1,
-            "price": 100
+            "id": 10,
+            "quantity": 1
           }
         ]
       },
       {
         "1719374162016": [
           {
-            "name": "Milfoil",
-            "quantity": 2,
-            "price": 200
+            "id": 5,
+            "quantity": 2
           },
           {
-            "name": "Dutch clover",
-            "quantity": 4,
-            "price": 300
+            "id": 7,
+            "quantity": 4
           }
         ]
       },
       {
         "1719275052016": [
           {
-            "name": "product3",
-            "quantity": 3,
-            "price": 300
+            "id": 15,
+            "quantity": 3
           }
         ]
       }
     ],
     "liked_products": [
-      227114,
-      51662,
-      77116
+      3,
+      4,
+      5
     ],
     "products_in_cart": [
       {
         "id": 1,
-        "japanese_name": "product1",
-        "price": 500,
-        "quantity": 4,
-        "image_url": "https://bs.plantnet.org/image/o/53c73903dc455a3d734b193dad7d9d8c4ec0e324"
+        "quantity": 4
       },
       {
-        "id": 10,
-        "japanese_name": "product2",
-        "price": 200,
-        "quantity": 2,
-        "image_url": "https://bs.plantnet.org/image/o/53c73903dc455a3d734b193dad7d9d8c4ec0e324"
+        "id": 2,
+        "quantity": 2
       }
     ],
     "inquiry_history": [

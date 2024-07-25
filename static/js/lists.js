@@ -105,7 +105,7 @@ window.onload = async () => {
     console.log(classfiedUser)
 
     // サンプルの植物データをローカルストレージから取得する。取得できない場合は、サンプルデータを保存する。
-    const plants = JSON.parse(localStorage.getItem('plants'));
+    let plants = JSON.parse(localStorage.getItem('plants'));
     if (!plants) {
         await storeSamplePlantsDataToLocalStorage();
         plants = JSON.parse(localStorage.getItem('plants'));

@@ -57,3 +57,44 @@
 1. `headerDisplay`関数を使って、logged-inかnot-logged-inクラスを持つエレメントの表示を調整する。
 2. ログアウトリンクには、clickのイベントリスナーを付け、クリックされた時はuserクラスのlogoutメソッドを呼び出すようにする。
 
+
+### 素材引用元
+- himawari.jpg: https://www.photo-ac.com/main/detail/29961263&title=%E3%81%B2%E3%81%BE%E3%82%8F%E3%82%8A%EF%BC%91%EF%BC%94
+
+- sedam.jpg: https://www.photo-ac.com/main/detail/30203663&title=%E3%82%BB%E3%83%80%E3%83%A0%E3%82%A2%E3%83%88%E3%83%A9%E3%83%B3%E3%83%86%E3%82%A3%E3%82%B9
+
+- anslium.jpg: https://www.photo-ac.com/main/detail/30401170&title=%E3%82%A2%E3%83%B3%E3%82%B9%E3%83%AA%E3%82%A6%E3%83%A0
+
+- kapoc.jpg: https://www.photo-ac.com/main/detail/29565548&title=%E5%BA%AD%E3%81%AE%E3%82%AB%E3%83%9D%E3%83%83%E3%82%AF%EF%BC%88%E3%82%B7%E3%82%A7%E3%83%95%E3%83%AC%E3%83%A9%EF%BC%89#goog_rewarded
+
+- matsubagiku.jpg: https://www.photo-ac.com/main/detail/30050149&title=%E3%83%94%E3%83%B3%E3%82%AF%E8%89%B2%E3%81%AE%E3%83%9E%E3%83%84%E3%83%90%E3%82%AE%E3%82%AF#goog_rewarded
+
+- bromeria.jpg: https://www.photo-ac.com/main/detail/29685303&title=%E3%83%96%E3%83%AD%E3%83%A1%E3%83%AA%E3%82%A2%E3%81%AE%E9%AE%AE%E3%82%84%E3%81%8B%E3%81%AA%E8%BC%9D%E3%81%8D
+
+- biora.jpg: https://www.photo-ac.com/main/detail/30392318&title=%E3%83%93%E3%82%AA%E3%83%A9%E3%81%AE%E8%8A%B1#goog_rewarded
+
+- daria.jpg: https://www.photo-ac.com/main/detail/29985844&title=%E9%BB%84%E8%89%B2%E3%81%84%E3%83%80%E3%83%AA%E3%82%A2
+
+- unbelata.jpg: https://www.photo-ac.com/main/detail/30105616&title=%E6%97%A5%E3%81%AE%E5%85%89%E3%82%92%E6%B5%B4%E3%81%B3%E3%82%8B%E3%82%A6%E3%83%B3%E3%83%99%E3%83%A9%E3%83%BC%E3%83%80%E3%81%AE%E6%8C%BF%E3%81%97%E6%9C%A8%EF%BC%92%EF%BC%91
+
+- monstela.jpg: https://www.photo-ac.com/main/detail/30211285&title=%E3%83%A2%E3%83%B3%E3%82%B9%E3%83%86%E3%83%A9#goog_rewarded
+
+- dulanta.jpg: https://www.photo-ac.com/main/detail/30405215&title=%E3%83%87%E3%83%A5%E3%83%A9%E3%83%B3%E3%82%BF%EF%BC%88%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%88%E3%83%A9%E3%83%96%E3%83%BB%E3%82%A2%E3%83%AB%E3%83%90%EF%BC%8910#goog_rewarded:
+
+- giboushi.jpg: https://www.photo-ac.com/main/detail/29959710&title=%E3%82%AE%E3%83%9C%E3%82%A6%E3%82%B7%E2%91%A0#goog_rewarded
+
+- hagoromo-jasmin.jpg: https://www.photo-ac.com/main/detail/29629988&title=%E3%83%8F%E3%82%B4%E3%83%AD%E3%83%A2%E3%82%B8%E3%83%A3%E3%82%B9%E3%83%9F%E3%83%B3#goog_rewarded
+
+- peperomea.jpg: https://www.photo-ac.com/main/detail/29832539&title=%E7%AA%93%E9%9A%9B%E3%81%AE%E3%83%9A%E3%83%9A%E3%83%AD%E3%83%9F%E3%82%A2
+
+- potos.jpg: https://www.photo-ac.com/main/detail/29929333&title=%E3%83%9D%E3%83%88%E3%82%B9%E3%81%AE%E8%83%8C%E6%99%AF 
+
+- mint.jpg: https://www.photo-ac.com/main/detail/30254913&title=%E3%83%9F%E3%83%B3%E3%83%88#goog_rewarded
+
+- saboten.jpg: https://www.photo-ac.com/main/detail/29583337&title=%E6%A4%8D%E6%9C%A8%E9%89%A2%E3%81%AE%E3%82%B5%E3%83%9C%E3%83%86%E3%83%B3%EF%BC%93%E3%81%A4#goog_rewarded
+
+- agabe.jpg: https://www.photo-ac.com/main/detail/30096988&title=%E5%B0%8F%E9%89%A2%E3%81%AB%E6%A4%8D%E3%81%88%E3%82%89%E3%82%8C%E3%81%9F%E5%B0%8F%E8%8B%97%E3%81%AE%E8%A6%B3%E8%91%89%E6%A4%8D%E7%89%A9%EF%BC%88%E3%82%A2%E3%82%AC%E3%83%99%EF%BC%89#goog_rewarded
+
+- ajisai.jpg: https://www.photo-ac.com/main/detail/30067441&title=%E5%88%9D%E5%A4%8F%E3%81%AE%E8%8A%B1%E3%80%80%E9%AE%AE%E3%82%84%E3%81%8B%E3%81%AA%E8%B5%A4%E7%B4%AB%E8%89%B2%E3%81%AE%E3%82%A2%E3%82%B8%E3%82%B5%E3%82%A4#goog_rewarded
+
+- katoleya.jpg: https://www.photo-ac.com/main/detail/29923825&title=%E7%B4%AB%E8%89%B2%E3%81%AE%E3%82%AB%E3%83%88%E3%83%AC%E3%83%A4#goog_rewarded
