@@ -30,7 +30,7 @@ class User {
                     phone_number: this.phone_number,
                     address: this.address,
                     liked_products: [],
-                    purchase_method: null,
+                    payment_method: null,
                     products_in_cart: [],
                 };
                 console.log(newUser);

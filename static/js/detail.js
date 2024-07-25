@@ -139,6 +139,8 @@ function addToCart(plant, user) {
     // Plantクラスのメソッドを使い、カートに追加する商品の情報を作成する
     const cartItem = plant.createCartItem(productQuantity.value);
 
+    console.log('this is cartItem', cartItem);
+
     const cart = user.products_in_cart || [];
     // カートに商品が存在するかどうかを確認
     let isExist = false;

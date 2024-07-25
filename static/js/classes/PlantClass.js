@@ -88,10 +88,6 @@ class Plant {
     createCartItem(quantity = 1) {
         return {
             id: this.id,
-            name: this.name,
-            japanese_name: this.japanese_name,
-            price: this.price,
-            image_url: this.image_url,
             quantity: quantity,
         }
     }
@@ -103,10 +99,6 @@ class Plant {
     createPurchaseItem(quantity = this.quantity) {
         return {
             id: this.id,
-            name: this.name,
-            japanese_name: this.japanese_name,
-            price: this.price,
-            image_url: this.image_url,
             quantity: quantity,
         }
     }
