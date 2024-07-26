@@ -3,6 +3,7 @@
 ### [設計書リンク](https://docs.google.com/spreadsheets/d/1gL0qZ5nkARnwHfqiKx_gQFJBnHYZO9y1kT6b-fCjQfU/edit?gid=1191905279#gid=1191905279)
 
 
+
 ## 各ページ概要
 ### ログイン(login.html)
 1. ページアクセス時に、ユーザデータがローカルストレージにない場合、`fetchData`関数を用いてサンプルユーザデータである`data\UsersSample.json`をローカルストレージに格納する。
@@ -23,7 +24,6 @@
 1. `storeSamplePlantsDataToLocalStorage`関数を使い、`data\PlantsSample.json`のサンプルデータを呼び出し、ローカルストレージに保存する。
 2. `createclassifiedAndLists`関数を使い、ローカルストレージから取得したサンプルの植物データを、クラス化し、クラスのメソッドを使い、BootStrapのカードを作成する。また、クラス化したデータをArrayにしたものを返す。
 3. PlantクラスとUserクラスにそれぞれお気に入り登録を制御する`toggleLike`メソッドを設定し、それを利用してお気に入り登録・解除ができるように設定。商品詳細画面でもお気に入り登録ができるボタン（スターボタン）があるが、そのボタンが押された時にIDが保存されるようになっており、そのIDのタイプをNumber型に統一。
-
 
 ### 商品詳細画面(detail.html)
 1. この画面は商品の「詳細」ボタンを押したときにナビゲートされる想定のページのため、「詳細」ボタンが押された時は、URLのクエリに商品の`slug`がついた状態になっている。そこで、その`slug`の値をまず取得する。
@@ -65,13 +65,34 @@
 2. カード名義が空欄でない、カードナンバーは16桁の数字、CVVは3桁の数字でないとフォームがsubmitできないようにしている。
 3. CVVの数字をマスクするために、Inputを2つ重ねて表示するようにして、上にあるInputにダミーの値を表示させ、下にあるInputに実際のValueを格納するようにしている。
 
+
+
 ## 全体に関する概要
+### Bootstrap 5.2.3
+1. 各ページでBootstrap 5.2.3を cdn からインポートして使用している。
+
 ### ヘッダー(各html, header.js)
 1. `headerDisplay`関数を使って、logged-inかnot-logged-inクラスを持つエレメントの表示を調整する。
 2. ログアウトリンクには、clickのイベントリスナーを付け、クリックされた時はuserクラスのlogoutメソッドを呼び出すようにする。
 
+### CSS
+1. 大元となるCSSファイルとして`/static/css/common.css`がある。
+2. 各ページ専用のCSSは、必要なページにのみ専用のCSSを作りそれぞれインポートしている。
 
-### 素材引用元
+### フッター(各HTML)
+1. フッターにはJSを使用していないが、各ページにSNSリンクとお問い合わせ、プライバシーポリシー、特定商取引ページを含むフッターをマニュアルで設置している。
+
+
+
+## テスト用ユーザデータ（最初からサンプルデータに登録されているユーザ）
+
+email:`test@mail.com`
+
+password:`password`
+
+
+
+## 素材引用元
 - himawari.jpg: https://www.photo-ac.com/main/detail/29961263&title=%E3%81%B2%E3%81%BE%E3%82%8F%E3%82%8A%EF%BC%91%EF%BC%94
 
 - sedam.jpg: https://www.photo-ac.com/main/detail/30203663&title=%E3%82%BB%E3%83%80%E3%83%A0%E3%82%A2%E3%83%88%E3%83%A9%E3%83%B3%E3%83%86%E3%82%A3%E3%82%B9
@@ -111,3 +132,5 @@
 - ajisai.jpg: https://www.photo-ac.com/main/detail/30067441&title=%E5%88%9D%E5%A4%8F%E3%81%AE%E8%8A%B1%E3%80%80%E9%AE%AE%E3%82%84%E3%81%8B%E3%81%AA%E8%B5%A4%E7%B4%AB%E8%89%B2%E3%81%AE%E3%82%A2%E3%82%B8%E3%82%B5%E3%82%A4#goog_rewarded
 
 - katoleya.jpg: https://www.photo-ac.com/main/detail/29923825&title=%E7%B4%AB%E8%89%B2%E3%81%AE%E3%82%AB%E3%83%88%E3%83%AC%E3%83%A4#goog_rewarded
+
+- home-main-image.jpg: https://www.photo-ac.com/main/detail/29722980&title=%E3%82%AC%E3%82%B8%E3%83%A5%E3%83%9E%E3%83%AB#goog_rewarded

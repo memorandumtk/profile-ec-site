@@ -6,7 +6,7 @@
     "email": "test@mail.com",
     "phone_number": "1234567890",
     "address": "test-address",
-    "password": "p",
+    "password": "password",
     "is_logged_in": false,
     "purchase_history": [
       {

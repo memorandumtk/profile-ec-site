@@ -1,6 +1,7 @@
 
 import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
+import { checkDarkMode } from './utils/checkDarkMode.js';
 
 const lastNameInput = document.querySelector('#last-name');
 const firstNameInput = document.querySelector('#first-name');
@@ -11,6 +12,7 @@ const paymentMethodCashRadio = document.querySelector('#payment-method-cash');
 const paymentMethodCardRadio = document.querySelector('#payment-method-card');
 const linkToCardForm = document.querySelector('#link-to-card-form');
 const mypageForm = document.querySelector('#mypage-form');
+const saveButton = document.querySelector('#save-button');
 
 /**
  * マイページ画面の各フォームにユーザー情報を表示する関数
@@ -60,6 +62,16 @@ const handleMypageFormSubmit = (event, user) => {
     alert('マイページ情報を更新しました。');
 }
 
+/**
+ * 送信ボタンの色を調整する関数
+ */
+const adjustButtonColor = () => {
+    if (checkDarkMode()) {
+        saveButton.classList.add('btn-light');
+    } else {
+        saveButton.classList.add('btn-secondary', 'text-white');
+    }
+}
 
 /**
  * ページが読み込まれたときに実行される関数
@@ -79,4 +91,5 @@ window.addEventListener('load', () => {
         handleMypageFormSubmit(event, classfiedUser);
     });
 
+    adjustButtonColor();
 });

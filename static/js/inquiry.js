@@ -64,9 +64,9 @@ const handleInquiryFormSubmit = (event, user) => {
  */
 const adjustButtonColor = () => {
     if (checkDarkMode()) {
-        inquiryButton.classList.add('btn-outline-light');
+        inquiryButton.classList.add('btn-light');
     } else {
-        inquiryButton.classList.add('btn-outline-secondary');
+        inquiryButton.classList.add('btn-secondary', 'text-white');
     }
 }
 

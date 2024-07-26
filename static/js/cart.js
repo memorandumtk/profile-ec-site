@@ -12,6 +12,7 @@ const cartProduct = document.querySelector('#cart-products');
 const cartSummaryDiv = document.querySelector('#cart-summary');
 const totalPriceSpan = document.querySelector('#total-price');
 const purchaseButton = document.querySelector('#purchase-button');
+const summaryPriceDiv = document.querySelector('#summary-price-div');
 
 /**
  * 金額を3桁区切りにする関数
@@ -79,6 +80,8 @@ function displayCartList(user, products) {
         emptyCart.textContent = '現在カートに商品がありません。';
         cartSummaryDiv.appendChild(emptyCart);
         return;
+    } else {
+        summaryPriceDiv.classList.remove('d-none');
     }
 
     const cartListUl = document.createElement('ul');

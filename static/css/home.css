@@ -35,7 +35,7 @@
   font-weight: bold;
   border: 3px solid #f1f1f1;
   position: absolute;
-  top: 25%; /* 上から1/4の位置 */
+  top: 40%; /* 上から1/4の位置 */
   left: 50%; /* 左から中央の位置 */
   transform: translate(-50%, -50%);
   z-index: 2;
