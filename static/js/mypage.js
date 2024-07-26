@@ -14,7 +14,6 @@ const mypageForm = document.querySelector('#mypage-form');
 
 /**
  * マイページ画面の各フォームにユーザー情報を表示する関数
- * *** cardInfoInput は未実装。 ***
  */
 const formDisplay = (user) => {
     if (user.is_logged_in) {
