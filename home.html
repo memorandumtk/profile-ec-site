@@ -49,30 +49,24 @@
                     <li class="nav-item logged-in">
                         <a class="nav-link" href="/cart.html">カート</a>
                     </li>
-                    <li class="nav-item logged-in">
-                        <a class="nav-link" href="/mypage.html">マイページ</a>
-                    </li>
                     <li class="nav-item not-logged-in">
                         <a class="nav-link" href="/register.html">ユーザ登録</a>
                     </li>
                     <li class="nav-item not-logged-in">
                         <a class="nav-link" href="/login.html">ログイン</a>
                     </li>
-                    <li class="nav-item logged-in">
-                        <a id="logout" class="nav-link" href="/login.html">ログアウト</a>
-                    </li>
+                    <!-- 以下ドロップダウンはユーザがログインしている時のみ表示される。 -->
                     <li id="user-email-dropdown-li" class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle user-email-dropdown" href="#" id="dropdownId"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <!-- ユーザのEmailが入る -->
                         </a>
-                        <!-- ここは、ユーザ関連のリンクにしてもいいかも -->
                         <ul class="dropdown-menu" aria-labelledby="dropdownId">
                             <li>
                                 <a class="dropdown-item" href="/mypage.html">マイページ</a>
                             </li>
                             <li>
-                                <a id="logout-in-dropdown" class="dropdown-item" href="/login.html">ログアウト</a>
+                                <a id="logout" class="dropdown-item" href="/login.html">ログアウト</a>
                             </li>
                         </ul>
                     </li>
@@ -81,7 +75,7 @@
         </div>
     </nav>
 
-    <main class="container-sm p-3 mb-4">
+    <main class="container-sm px-5">
         <div class="d-grid gap-5">
 
             <!-- サイトコンセプトを載せる箇所 -->
@@ -90,7 +84,7 @@
                 <!-- <div class="position-absolute top-50 start-50 translate-middle text-white"> -->
                 <div id="home-main-text">
                     <h1>オンラインガーデニング</h1>
-                    <div>オンラインガーデニングへようこそ!</div>
+                    <div>PRiENT ECサイト へようこそ!</div>
                 </div>
                 <!-- 画像引用サイト：https://www.pexels.com/video/wall-plant-leaf-decoration-9412046/ -->
                 <img src="./assets/home-main-image.png" id="home-main-image" class="" alt="Main Image" />

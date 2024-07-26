@@ -44,6 +44,11 @@ html {
 }
 
 #header-nav-bar {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  z-index: 100;
+  width: 100%;
   background-color: var(--near-white);
   height: 80px;
 }
@@ -54,6 +59,16 @@ html {
 
 #header-nav-bar li a:hover {
   color: var(--primary);
+}
+
+#header-nav-bar .active {
+  font-weight: 600;
+}
+
+/* メインコンテンツ */
+main {
+  margin-top: 84px;
+  margin-bottom: 60px;
 }
 
 /* 基本的なFormデザイン */
@@ -130,6 +145,10 @@ html {
   }
 
   #link-to-card-form {
+    color: var(--main-white);
+  }
+  
+  .table {
     color: var(--main-white);
   }
 }

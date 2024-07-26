@@ -30,15 +30,15 @@
             <div class="collapse navbar-collapse w-100 flex justify-content-end" id="collapsibleNavId">
                 <ul class="navbar-nav mt-2 mt-lg-0 justify-content-center align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home.html">Home</a>
+                        <a class="nav-link" href="/home.html">
+                            Home
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/lists.html">商品一覧</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/inquiry.html">
-                            お問い合わせ
-                        </a>
+                        <a class="nav-link" href="/inquiry.html">お問い合わせ</a>
                     </li>
                     <!-- ここからログインしているかどうかでリンク表示を分けるために「logged-in」と「not-logged-in」のクラスを追加 -->
                     <li class="nav-item logged-in">
@@ -47,30 +47,24 @@
                     <li class="nav-item logged-in">
                         <a class="nav-link" href="/cart.html">カート</a>
                     </li>
-                    <li class="nav-item logged-in">
-                        <a class="nav-link" href="/mypage.html">マイページ</a>
-                    </li>
                     <li class="nav-item not-logged-in">
                         <a class="nav-link" href="/register.html">ユーザ登録</a>
                     </li>
                     <li class="nav-item not-logged-in">
                         <a class="nav-link" href="/login.html">ログイン</a>
                     </li>
-                    <li class="nav-item logged-in">
-                        <a id="logout" class="nav-link" href="/login.html">ログアウト</a>
-                    </li>
+                    <!-- 以下ドロップダウンはユーザがログインしている時のみ表示される。 -->
                     <li id="user-email-dropdown-li" class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle user-email-dropdown" href="#" id="dropdownId"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <!-- ユーザのEmailが入る -->
                         </a>
-                        <!-- ここは、ユーザ関連のリンクにしてもいいかも -->
                         <ul class="dropdown-menu" aria-labelledby="dropdownId">
                             <li>
                                 <a class="dropdown-item" href="/mypage.html">マイページ</a>
                             </li>
                             <li>
-                                <a id="logout-in-dropdown" class="dropdown-item" href="/login.html">ログアウト</a>
+                                <a id="logout" class="dropdown-item" href="/login.html">ログアウト</a>
                             </li>
                         </ul>
                     </li>
@@ -79,7 +73,6 @@
         </div>
     </nav>
 
-
     <main class="container-sm p-3 mb-4">
         <!-- PRiENTより引用 -->
         <div class="d-flex flex-column">
@@ -87,7 +80,7 @@
                 プライバシーポリシー
             </h2>
 
-            <div class="text-black">
+            <div class="">
                 <p>株式会社ピーアールアイ(以下、「当社」といいます。)は、本ウェブサイト上で提供するサービス(以下,「本サービス」といいます。)における、ユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシー(以下、「本ポリシー」といいます。)を定めます。
                 </p>
                 <h4>第1条(個人情報)</h4>
