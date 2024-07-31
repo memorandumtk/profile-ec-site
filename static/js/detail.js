@@ -159,7 +159,7 @@ function addToCart(plant, user) {
     updateUserDataOnLocalStorage(user);
 
     // カートページにリダイレクト
-    window.location.href = '/cart.html';
+    window.location.href = '/views/html/cart.html';
 }
 
 

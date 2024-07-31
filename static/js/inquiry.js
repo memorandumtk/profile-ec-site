@@ -20,7 +20,7 @@ const formDisplay = (user) => {
         
         const inquiryHistory = user.inquiry_history;
         if (inquiryHistory && inquiryHistory[inquiryHistory.length - 1].status === "draft") {
-            inquiryText.value = inquiryHistory[inquiryHistory.length - 1].inquiry_content;
+            inquiryText.value = inquiryHistory[inquiryHistory.length - 1].inquiry_content || '';
         }
     }
 }
@@ -30,7 +30,7 @@ const formDisplay = (user) => {
  */
 const handleInquiryFormSubmit = (event, user) => {
 
-    // ユーザがログインしていない場合は、フォームの内容を保存できないため、お問い合わせを受け付けたイメージで、アラートを表示する
+    // ユーザがログインしていない場合は、フォームの内容を保存できない(ローカルストレージにマップするデータがない)ため、お問い合わせを受け付けたイメージで、アラートを表示する
     if (!user) {
         alert('お問い合わせを受け付けました。');
         return;
@@ -38,11 +38,19 @@ const handleInquiryFormSubmit = (event, user) => {
 
     // FormDataにinquiryFormを引数として指定することで、フォームの内容を格納する
     let formData = new FormData(inquiryForm);
-    // お問い合わせ内容が空の場合は送信しない
+    // バリデーション
+    // 名前、メールアドレス、お問い合わせ内容が空の場合は送信しない
+    if (formData.get('inquiry_name') === '') {
+        alert('名前を入力してください。');
+        return;
+    }
+    if (formData.get('inquiry_email') === '') {
+        alert('メールアドレスを入力してください。');
+        return;
+    }
     if (formData.get('inquiry_text') === '') {
         alert('お問い合わせ内容を入力してください。');
         return;
-    
     }
     // お問い合わせ内容を送信した場合、statusを'sent'に変更する
     formData.append('status', 'sent');

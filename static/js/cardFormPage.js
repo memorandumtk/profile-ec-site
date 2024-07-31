@@ -64,7 +64,7 @@ const handleMypageFormSubmit = (event, user) => {
         user.payment_method = 'card';
         updateUserDataOnLocalStorage(user);
         alert('クレジットカード情報を更新しました。');
-        window.location.href = '/mypage.html';
+        window.location.href = '/views/html/mypage.html';
     } catch (error) {
         console.error(error);
         alert('クレジットカード情報の更新に失敗しました。');

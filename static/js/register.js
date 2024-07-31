@@ -9,6 +9,12 @@ const registerUser = async () => {
     const phoneNumber = document.querySelector('#phone').value;
     const address = document.querySelector('#address').value;
 
+    // バリデーション
+    if (email === '' || password === '' || firstName === '' || lastName === '' || phoneNumber === '' || address === '') {
+        alert('全ての項目を入力してください。');
+        return;
+    }
+
     const user = new User(email, password, firstName, lastName, phoneNumber, address);
 
     user.register();

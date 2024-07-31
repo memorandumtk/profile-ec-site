@@ -28,8 +28,9 @@ function handlePurchase(user, purchaseList) {
     user.products_in_cart = [];
     updateUserDataOnLocalStorage(user);
 
+    alert('購入が完了しました。');
     // ホーム画面に戻る
-    window.location.href = '/home.html';
+    window.location.href = '/views/html/home.html';
 }
 
 /**
