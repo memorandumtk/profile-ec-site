@@ -3,16 +3,16 @@ import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
 import { checkDarkMode } from './utils/checkDarkMode.js';
 
-const lastNameInput = document.querySelector('#last-name');
-const firstNameInput = document.querySelector('#first-name');
-const phoneNumberInput = document.querySelector('#phone');
-const addressInput = document.querySelector('#address');
-const emailInput = document.querySelector('#email');
-const paymentMethodCashRadio = document.querySelector('#payment-method-cash');
-const paymentMethodCardRadio = document.querySelector('#payment-method-card');
-const linkToCardForm = document.querySelector('#link-to-card-form');
-const mypageForm = document.querySelector('#mypage-form');
-const saveButton = document.querySelector('#save-button');
+const lastNameInput = document.getElementById('last-name');
+const firstNameInput = document.getElementById('first-name');
+const phoneNumberInput = document.getElementById('phone');
+const addressInput = document.getElementById('address');
+const emailInput = document.getElementById('email');
+const paymentMethodCashRadio = document.getElementById('payment-method-cash');
+const paymentMethodCardRadio = document.getElementById('payment-method-card');
+const linkToCardForm = document.getElementById('link-to-card-form');
+const mypageForm = document.getElementById('mypage-form');
+const saveButton = document.getElementById('save-button');
 
 /**
  * マイページ画面の各フォームにユーザー情報を表示する関数

@@ -6,8 +6,8 @@ import fetchData from "/static/js/utils/fetchJson.js";
  * ログイン処理を行う関数
  */
 const userLogIn = async () => {
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
     // Userクラスのインスタンスを作成し、login()メソッドを呼び出す。
     const user = new User(email, password);
@@ -17,7 +17,7 @@ const userLogIn = async () => {
 /**
  * ログインフォームが送信されたときに実行される関数
  */
-document.querySelector('#login-form').addEventListener('submit', e => {
+document.getElementById('login-form').addEventListener('submit', e => {
     e.preventDefault();
     userLogIn();
 })

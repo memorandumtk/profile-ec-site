@@ -4,9 +4,9 @@ import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 const elementsForLoggedIn = document.querySelectorAll('.logged-in');
 const elementsForNotLoggedIn = document.querySelectorAll('.not-logged-in');
 
-const logoutAnchor = document.querySelector('#logout');
+const logoutAnchor = document.getElementById('logout');
 const dropdownOfUser = document.querySelector('.user-email-dropdown');
-const dropdownOfLiElement = document.querySelector('#user-email-dropdown-li');
+const dropdownOfLiElement = document.getElementById('user-email-dropdown-li');
 
 /**
  * ユーザがログインしているかによって、ヘッダーの表示を変える関数

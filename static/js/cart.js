@@ -8,17 +8,17 @@ import { createClassifiedProduct, createClassifiedProducts } from './utils/creat
 import { displayPurchaseModal } from './utils/displayPurchaseModal.js';
 import { createPlantClassByKey } from './utils/createPlantClassByKey.js';
 
-const cartProduct = document.querySelector('#cart-products');
-const cartSummaryDiv = document.querySelector('#cart-summary');
-const totalPriceSpan = document.querySelector('#total-price');
-const purchaseButton = document.querySelector('#purchase-button');
-const summaryPriceDiv = document.querySelector('#summary-price-div');
+const cartProduct = document.getElementById('cart-products');
+const cartSummaryDiv = document.getElementById('cart-summary');
+const totalPriceSpan = document.getElementById('total-price');
+const purchaseButton = document.getElementById('purchase-button');
+const summaryPriceDiv = document.getElementById('summary-price-div');
 
 /**
  * 金額を3桁区切りにする関数
  */
 function addCommaToPrice(price) {
-    return price.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    return price.toLocaleString();
 }
 
 /**

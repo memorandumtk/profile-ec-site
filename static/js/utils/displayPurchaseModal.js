@@ -28,8 +28,9 @@ function handlePurchase(user, purchaseList) {
     user.products_in_cart = [];
     updateUserDataOnLocalStorage(user);
 
+    alert('購入が完了しました。');
     // ホーム画面に戻る
-    window.location.href = '/home.html';
+    window.location.href = '/views/html/home.html';
 }
 
 /**
@@ -37,7 +38,7 @@ function handlePurchase(user, purchaseList) {
  */
 export function displayPurchaseModal(user, purchaseList) {
 
-    const modal = document.querySelector('#purchase-modal');
+    const modal = document.getElementById('purchase-modal');
     modal.innerHTML = '';
     modal.classList.remove('d-none');
     modal.classList.add('d-flex', 'flex-column', 'justify-content-center', 'align-items-center');
