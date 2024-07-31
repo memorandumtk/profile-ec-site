@@ -5,9 +5,9 @@ import { createPlantClassByKey } from "./utils/createPlantClassByKey.js";
 import { getFormattedDate } from "./utils/getFormattedDate.js";
 
 const carouselItems = document.querySelectorAll('.carousel-item');
-const purchaseHistoryCards = document.querySelector('#purchase-history-cards');
-const numberOfPurchaseHistory = document.querySelector('#number-of-purchase-history');
-const purchaseHistorySection = document.querySelector('#purchase-history-section');
+const purchaseHistoryCards = document.getElementById('purchase-history-cards');
+const numberOfPurchaseHistory = document.getElementById('number-of-purchase-history');
+const purchaseHistorySection = document.getElementById('purchase-history-section');
 
 /**
  * 植物サンプルデータをセッションストレージに保存し、データを返す関数。
@@ -25,7 +25,7 @@ async function storeSamplePlantsData() {
  * 金額を3桁区切りにする関数
  */
 function addCommaToPrice(price) {
-    return price.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    return price.toLocaleString();
 }
 
 /**
@@ -51,13 +51,13 @@ function displayPlantsOnCarousel(plants) {
  * 購入アイテムがclass化できなかった場合に表示するHTMLを生成する関数。
  */
 function generateErrorPurchaseItemHTML() {
-    return `
-        <li class="purchase-item list-group-item">
-            <div class="card-title">
-                データが見つかりませんでした。
-            </div>
-        </li>
-    `;
+    const error = document.createElement('li');
+    error.classList.add('purchase-item', 'list-group-item');
+    const errorMessageDiv = document.createElement('div');
+    errorMessageDiv.classList.add('card-title');
+    errorMessageDiv.textContent = 'データが見つかりませんでした。';
+    error.appendChild(errorMessageDiv);
+    return error
 }
 
 /**
@@ -65,16 +65,16 @@ function generateErrorPurchaseItemHTML() {
  */
 function generatePurchaseItemImgAndLink(classfiedPlant) {
 
-    return `
-        <a href="detail.html?slug=${classfiedPlant.slug}">
-            <img 
-                src="${classfiedPlant.image_url}" 
-                class="rounded rounded-1 border border-0"
-                alt="${classfiedPlant.name}"
-                style="width: 100px; height: 100px;"
-            >
-        </a>
-    `;
+    const anchor = document.createElement('a');
+    anchor.href = `detail.html?slug=${classfiedPlant.slug}`;
+    const img = document.createElement('img');
+    img.src = classfiedPlant.image_url;
+    img.classList.add('rounded', 'rounded-1', 'border', 'border-0');
+    img.style.width = '100px';
+    img.style.height = '100px';
+    anchor.appendChild(img);
+    
+    return anchor;
 }
 
 /**
@@ -95,18 +95,32 @@ function generatePurchaseItemHTML(classfiedPlant, item) {
     const totalPrice = classfiedPlant.addCommaToPrice(classfiedPlant.calculateTotalPrice());
     const price = classfiedPlant.addCommaToPrice();
 
-    return `
-        <div class="d-flex flex-row w-100 mb-1 rounded rounded-1 border-bottom border-1">
-            <div class="purchase-item list-group-item flex-grow-1 border-0">
-                <div class="card-title">商品名: ${classfiedPlant.japanese_name}</div>
-                <div class="card-text">購入数: ${classfiedPlant.quantity}</div>
-                <div class="card-text">価格: ${price}円 - 計: ${totalPrice}円</div>
-            </div>
-            <div>
-                ${classfiedPlant.image_url ? generatePurchaseItemImgAndLink(classfiedPlant) : ''}
-            </div>
-        </div>
-    `;
+    const purchaseItemDiv = document.createElement('div');
+    purchaseItemDiv.classList.add('d-flex', 'flex-row', 'w-100', 'mb-1', 'rounded', 'rounded-1', 'border-bottom', 'border-1');
+    const purchaseItem = document.createElement('div');
+    purchaseItem.classList.add('purchase-item', 'list-group-item', 'flex-grow-1', 'border-0');
+    const cardTitle = document.createElement('div');
+    cardTitle.classList.add('card-title');
+    cardTitle.textContent = `商品名: ${classfiedPlant.japanese_name}`;
+    const numberOfPurchase = document.createElement('div');
+    numberOfPurchase.classList.add('card-text');
+    numberOfPurchase.textContent = `購入数: ${classfiedPlant.quantity}`;
+    const priceOfPurchase = document.createElement('div');
+    priceOfPurchase.classList.add('card-text');
+    priceOfPurchase.textContent = `価格: ${price}円 - 計: ${totalPrice}円`;
+    purchaseItem.appendChild(cardTitle);
+    purchaseItem.appendChild(numberOfPurchase);
+    purchaseItem.appendChild(priceOfPurchase);
+    purchaseItemDiv.appendChild(purchaseItem);
+
+    if (classfiedPlant.image_url) {
+        const imgDiv = document.createElement('div');
+        const imgAndLink = classfiedPlant.image_url ? generatePurchaseItemImgAndLink(classfiedPlant) : '';
+        imgDiv.appendChild(imgAndLink);
+        purchaseItemDiv.appendChild(imgDiv);
+    }
+    
+    return purchaseItemDiv;
 }
 
 /**
@@ -119,7 +133,7 @@ function generatePurchaseItemHTML(classfiedPlant, item) {
 function generatePurchaseDateHTML(items, index) {
     const indexForDisplay = String(index + 1).padStart(2, '0');
     try {
-        let itemsHTML = '';
+        const listGroup = document.createElement('div');
         let allOfTotalPrice = 0;
         // kyesメソッドを使って、dateのキーデータを取得する。dateキーは1つしかないがArrayになる。例：["1719375844616"]
         const date = Object.keys(items);
@@ -127,23 +141,27 @@ function generatePurchaseDateHTML(items, index) {
             items[date].forEach(itemData => {
                 console.log('this is itemData: ', itemData);
                 const classifiedPlant = createPlantClassByKey(itemData.id, 'id');
-                itemsHTML += generatePurchaseItemHTML(classifiedPlant, itemData);
+                listGroup.appendChild(generatePurchaseItemHTML(classifiedPlant, itemData));
                 allOfTotalPrice += classifiedPlant.calculateTotalPrice();
             })
         });
         // 「01. 2024-04-10」のように表示するように。
         const dateForDisplay = getFormattedDate(date[0], 1);
 
-        return `
-            <div class="purchase-data card ">
-                <h3 class="card-header bg-transparent">${indexForDisplay + '. ' + dateForDisplay + ' - ' + addCommaToPrice(allOfTotalPrice) + '円'}</h3>
-                <div class="card-body">
-                    <div class="list-group list-group-flush">
-                        ${itemsHTML}
-                    </div>
-                </div>
-            </div>
-        `;
+        const purchaseCard = document.createElement('div');
+        purchaseCard.classList.add('purchase-data', 'card');
+        const cardHeader = document.createElement('h3');
+        cardHeader.classList.add('card-header', 'bg-transparent');
+        cardHeader.textContent = `${indexForDisplay}. ${dateForDisplay} - ${addCommaToPrice(allOfTotalPrice)}円`;
+        const purchaseCardBody = document.createElement('div');
+        purchaseCardBody.classList.add('card-body');
+        listGroup.classList.add('list-group', 'list-group-flush');
+
+        purchaseCard.appendChild(cardHeader);
+        purchaseCard.appendChild(purchaseCardBody);
+        purchaseCardBody.appendChild(listGroup);
+
+        return purchaseCard;
     } catch (error) {
         console.error(error);
         // 商品名が変更されている場合に起こるエラーをコンソールログに表示する。
@@ -160,15 +178,6 @@ function displayNumberOfPurchaseHistory(numberOfProcessedData) {
 }
 
 /**
- * 購入履歴が存在しない場合に表示するHTMLを生成する関数。
- */
-function generateErrorPurchaseHistoryHTML() {
-    return `
-        <h3 class="card-header bg-transparent">購入履歴がまだありません。</h3>
-    `;
-}
-
-/**
  * ユーザの購入履歴データを表示する関数。
  * @param {*} user 
  */
@@ -176,21 +185,20 @@ function displayPurchaseHistory(user) {
     const purchaseHistory = user.purchase_history;
     const orderdPurchaseHistory = purchaseHistory.sort((a, b) => Object.keys(b) - Object.keys(a));
 
-    let purchaseHistoryHTML = '';
     let numberOfProcessedData = 0;
 
     orderdPurchaseHistory.forEach((data, index) => {
         if (!data) {
-            purchaseHistoryHTML += generateErrorPurchaseHistoryHTML();
+            purchaseHistoryCards.textContent = '購入履歴がまだありません。';
             return;
         }
 
         // 購入履歴を3件まで表示するように。
         if (index > 2) return;
         if (generatePurchaseDateHTML(data, index) === null) {
-            purchaseHistoryHTML += '';
+            return;
         } else {
-            purchaseHistoryHTML += generatePurchaseDateHTML(data, index);
+            purchaseHistoryCards.appendChild(generatePurchaseDateHTML(data, index));
             numberOfProcessedData++;
         }
     });
@@ -198,8 +206,6 @@ function displayPurchaseHistory(user) {
     if (numberOfProcessedData > 0) {
         displayNumberOfPurchaseHistory(numberOfProcessedData);
     }
-
-    purchaseHistoryCards.innerHTML = purchaseHistoryHTML;
 
     // 購入履歴セクションのDIVを表示する。
     purchaseHistorySection.classList.remove('d-none');

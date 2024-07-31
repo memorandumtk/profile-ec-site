@@ -1,13 +1,13 @@
 import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
 
-const cardNameInput = document.querySelector('#card-name');
-const cardNumberInput = document.querySelector('#card-number');
-const expirationDateInput = document.querySelector('#card-expiration-date');
-const cvvInput = document.querySelector('#card-cvv');
-const cardForm = document.querySelector('#card-form');
-const inputForMasking = document.querySelector('#card-cvv-masking-input');
-const meesageElement = document.querySelector('#card-form-page-massage');
+const cardNameInput = document.getElementById('card-name');
+const cardNumberInput = document.getElementById('card-number');
+const expirationDateInput = document.getElementById('card-expiration-date');
+const cvvInput = document.getElementById('card-cvv');
+const cardForm = document.getElementById('card-form');
+const inputForMasking = document.getElementById('card-cvv-masking-input');
+const meesageElement = document.getElementById('card-form-page-massage');
 
 /**
  * クレジットカード画面の各フォームにイベントリスナーを追加する関数

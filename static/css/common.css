@@ -11,12 +11,9 @@
   --dark-green2: rgba(4, 44, 16);
   --background: linear-gradient(
     90deg,
-    var(--main) 0%,
+    var(--main) 0,
     var(--primary) 60%,
     var(--secondary) 100%
-      /* var(--main-white) 0%,
-    var(--near-white) 80%,
-    var(--secondary) 100% */
   );
   --background-dark: var(--dark-green2);
   --card-color: var(--secondary);
@@ -45,8 +42,8 @@ html {
 
 #header-nav-bar {
   position: fixed;
-  top: 0%;
-  left: 0%;
+  top: 0;
+  left: 0;
   z-index: 100;
   width: 100%;
   background-color: var(--near-white);
@@ -68,7 +65,7 @@ html {
 /* メインコンテンツ */
 main {
   margin-top: 84px;
-  margin-bottom: 60px;
+  padding-bottom: 90px;
 }
 
 /* 基本的なFormデザイン */
@@ -113,6 +110,16 @@ main {
   z-index: 10;
 }
 
+footer .navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-icons {
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
 .footer-icons a {
   font-size: 24px;
   color: var(--main-black);
@@ -140,6 +147,10 @@ main {
     color: var(--main-white);
   }
 
+  .navbar-toggler {
+    outline: 1px solid var(--main-white);
+  }
+
   #cards-container {
     min-height: 100%;
     min-width: 100%;
@@ -155,5 +166,28 @@ main {
   
   .table {
     color: var(--main-white);
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  #collapsibleNavId {
+    background-color: var(--main-white);
+    border-radius: 5px;
+  }
+
+  #collapsibleNavId .nav-link {
+    color: var(--main-black);
+  }
+
+  .footer {
+    position: relative;
+    background-color: var(--near-white);
+    text-align: center;
+    padding: 0 1rem;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    z-index: 10;
   }
 }

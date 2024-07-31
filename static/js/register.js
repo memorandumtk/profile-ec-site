@@ -2,12 +2,12 @@ import User from "./classes/UserClass.js";
 
 const registerUser = async () => {
     // inputデータを変数化。
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
-    const firstName = document.querySelector('#first-name').value;
-    const lastName = document.querySelector('#last-name').value;
-    const phoneNumber = document.querySelector('#phone').value;
-    const address = document.querySelector('#address').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const phoneNumber = document.getElementById('phone').value;
+    const address = document.getElementById('address').value;
 
     // バリデーション
     if (email === '' || password === '' || firstName === '' || lastName === '' || phoneNumber === '' || address === '') {
@@ -24,7 +24,7 @@ const registerUser = async () => {
     user.login();
 }
 
-document.querySelector('#register-form').addEventListener('submit', e => {
+document.getElementById('register-form').addEventListener('submit', e => {
     e.preventDefault();
     registerUser();
 })

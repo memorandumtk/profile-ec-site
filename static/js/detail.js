@@ -3,18 +3,18 @@ import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import User from './classes/UserClass.js';
 import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
 
-const productImage = document.querySelector('#product-image');
-const productName = document.querySelector('#product-name');
-const productPrice = document.querySelector('#product-price');
-const totalPrice = document.querySelector('#total-price');
-const totalPriceDiv = document.querySelector('#total-price-div');
-const productQuantity = document.querySelector('#product-quantity');
-const productDescription = document.querySelector('#product-description');
-const productCode = document.querySelector('#product-code');
-const productLikedIcon = document.querySelector('#liked-icon');
-const twitterShareButton = document.querySelector('#twitter-share-button');
-const facebookShareButton = document.querySelector('#facebook-share-button');
-const lineShareButton = document.querySelector('#line-share-button');
+const productImage = document.getElementById('product-image');
+const productName = document.getElementById('product-name');
+const productPrice = document.getElementById('product-price');
+const totalPrice = document.getElementById('total-price');
+const totalPriceDiv = document.getElementById('total-price-div');
+const productQuantity = document.getElementById('product-quantity');
+const productDescription = document.getElementById('product-description');
+const productCode = document.getElementById('product-code');
+const productLikedIcon = document.getElementById('liked-icon');
+const twitterShareButton = document.getElementById('twitter-share-button');
+const facebookShareButton = document.getElementById('facebook-share-button');
+const lineShareButton = document.getElementById('line-share-button');
 
 
 /**
@@ -186,7 +186,7 @@ window.addEventListener('load', () => {
     console.log(plant);
     displayProductInfo(plant, classfiedUser);
 
-    const cartButton = document.querySelector('#cart-button');
+    const cartButton = document.getElementById('cart-button');
     cartButton.addEventListener('click', () => {
         addToCart(plant, classfiedUser);
     });

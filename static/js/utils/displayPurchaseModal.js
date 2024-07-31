@@ -38,7 +38,7 @@ function handlePurchase(user, purchaseList) {
  */
 export function displayPurchaseModal(user, purchaseList) {
 
-    const modal = document.querySelector('#purchase-modal');
+    const modal = document.getElementById('purchase-modal');
     modal.innerHTML = '';
     modal.classList.remove('d-none');
     modal.classList.add('d-flex', 'flex-column', 'justify-content-center', 'align-items-center');

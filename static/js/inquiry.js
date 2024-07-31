@@ -2,11 +2,11 @@ import { createUserClassFromEmail } from './utils/createUserClassFromEmail.js';
 import { updateUserDataOnLocalStorage } from './utils/updateUserDataOnLocalStorage.js';
 import { checkDarkMode } from './utils/checkDarkMode.js';
 
-const inquiryName = document.querySelector('#inquiry_name');
-const inquiryEmail = document.querySelector('#inquiry_email');
-const inquiryText = document.querySelector('#inquiry_text');
-const inquiryForm = document.querySelector('#inquiry-form');
-const inquiryButton = document.querySelector('#inquiry-button');
+const inquiryName = document.getElementById('inquiry_name');
+const inquiryEmail = document.getElementById('inquiry_email');
+const inquiryText = document.getElementById('inquiry_text');
+const inquiryForm = document.getElementById('inquiry-form');
+const inquiryButton = document.getElementById('inquiry-button');
 
 /**
  * お問い合わせフォームの入力内容をユーザがログインしているかによって変える関数
