@@ -8,9 +8,11 @@ export function getFormattedDate(desiredDate = null, option = 0) {
     let date;
     switch (option) {
         case 1:
-            date = new Date(desiredDate);
+            date = new Date(Number(desiredDate));
+            break;
         default:
             date = new Date();
+            break;
     }
 
     const year = date.getFullYear();

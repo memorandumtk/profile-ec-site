@@ -67,7 +67,7 @@ class User {
             // ユーザーが認証された場合、セッションを保存。
             this.storeUserDataToSession();
             // ログイン後のページにリダイレクト。
-            window.location.href = '/home.html';
+            window.location.href = '/views/html/home.html';
         } else {
             console.log('User is not verified');
         }
@@ -115,7 +115,7 @@ class User {
         // セッションストレージからログインユーザーを削除。
         sessionStorage.removeItem('login_user');
         // ログアウト後のページにリダイレクト。
-        window.location.href = '/login.html';
+        window.location.href = '/views/html/login.html';
     }
 
     /**

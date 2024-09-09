@@ -134,3 +134,5 @@ password:`password`
 - katoleya.jpg: https://www.photo-ac.com/main/detail/29923825&title=%E7%B4%AB%E8%89%B2%E3%81%AE%E3%82%AB%E3%83%88%E3%83%AC%E3%83%A4#goog_rewarded
 
 - home-main-image.jpg: https://www.photo-ac.com/main/detail/29722980&title=%E3%82%AC%E3%82%B8%E3%83%A5%E3%83%9E%E3%83%AB#goog_rewarded
+
+- no-image.jpg:http://design-ec.com/?p=55
